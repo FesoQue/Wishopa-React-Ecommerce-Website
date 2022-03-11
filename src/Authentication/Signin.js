@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { TextField, Box, Button } from '@material-ui/core';
 import { Field, Form, Formik, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
@@ -25,19 +25,18 @@ const Signin = () => {
   const handleSubmit = (values, props) => {
     const email = values.email;
     const password = values.password;
+
     toast.promise(handleSignin(email, password), {
-      success: (data) => 'Account successfully signed in',
-      error: (err) => `This just happened: ${err.toString()}`,
+      error: (err) => `${err.toString()}`,
     });
     props.resetForm();
-    history.push('/checkout');
   };
 
   // ======== THIS CODE BELOW WORKS =========
 
-  // if(currentUser) {
-  //   history.push('/checkout');
-  // }
+  if (currentUser) {
+    history.push('/checkout');
+  }
 
   const validationSchema = Yup.object().shape({
     email: Yup.string()

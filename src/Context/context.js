@@ -49,7 +49,7 @@ export const AppContextProvider = ({ children }) => {
         setAllData(data);
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error.message);
       });
   };
 
@@ -224,8 +224,7 @@ export const AppContextProvider = ({ children }) => {
 
   return (
     <>
-      <AppContext.Provider value={value}>{children}</AppContext.Provider>;
-      <Toaster />
+      <AppContext.Provider value={value}>{children}</AppContext.Provider>
     </>
   );
 };

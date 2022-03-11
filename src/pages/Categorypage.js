@@ -25,7 +25,7 @@ const Categorypage = () => {
   const [filterValue, setFilterValue] = useState('');
 
   // useQuery fn
-  const { data, isLoading, isError } = useCategoryData(name);
+  const { data, isLoading, isError, refetch } = useCategoryData(name);
 
   // useContext
   const { handleSearch } = useAppContext();
@@ -119,8 +119,11 @@ const Categorypage = () => {
             </div>
           ) : null}
           {isError ? (
-            <div className='loading'>
+            <div className='loading error-gif'>
               <img src={ERROR} alt='loading' />
+              <button onClick={refetch} className='retry-btn'>
+                Retry
+              </button>
             </div>
           ) : null}
         </div>

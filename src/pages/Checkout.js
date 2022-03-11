@@ -1,7 +1,14 @@
 import React from 'react';
+import { useAppContext } from '../Context/context';
 
 const Checkout = () => {
-  return <section className='section'>Checkout</section>;
+  const { currentUser } = useAppContext();
+  console.log(currentUser);
+  return (
+    <section className='section'>
+      <p>{currentUser?.email}</p>
+    </section>
+  );
 };
 
 export default Checkout;

@@ -20,8 +20,10 @@ const NavSidebar = () => {
     >
       <nav className='mobile-nav-content slidein'>
         <div className='mobile-nav-header'>
-          <button onClick={() => handleCloseSidebar()}>
-            <GrClose />
+          <button className='close-btn' onClick={() => handleCloseSidebar()}>
+            <span>
+              <GrClose />
+            </span>
           </button>
           <h1 className='logo'>
             <Link to='/'>Wishopa</Link>

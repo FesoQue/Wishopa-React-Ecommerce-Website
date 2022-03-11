@@ -42,8 +42,8 @@ const Newsletter = () => {
         </div>
         {/* animation */}
 
-        <img src={GIF} alt='gif' className='gif-sm gif' />
-        <img src={GIF} alt='gif' className='gif-xl gif' />
+        <img src={GIF} alt='gif' className='gif-sm gif' loading='lazy' />
+        <img src={GIF} alt='gif' className='gif-xl gif' loading='lazy' />
       </div>
     </section>
   );
