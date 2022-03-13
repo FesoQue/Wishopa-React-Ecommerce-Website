@@ -399,7 +399,7 @@ td p {
   background-color: var(--hoverColor);
   padding: 1rem;
 }
-.summary-wrapper h4 {
+.summary-wrapper h3 {
   margin-bottom: 1rem;
   color: #fff;
   text-transform: capitalize;
@@ -427,22 +427,37 @@ td p {
 }
 .summary-wrapper button {
   display: flex;
-  align-items: center;
-  padding: 0.8rem;
+  justify-content: center;
+  align-items: csenter;
+  width: 100%;
+  padding: 0.8rem 0;
   margin-top: 2rem;
   background-color: #f85643;
   color: #fff;
   font-weight: 600;
-  border-radius: 40px;
+  border-radius: var(--radius);
   text-transform: uppercase;
 }
-.summary-wrapper button span {
-  margin-left: 0.3rem;
-  font-weight: 800;
+.checkout-tagline {
+  display: flex;
+  align-items: center;
+  margin-top: 0.8rem;
+}
+.checkout-tagline h4 {
+  color: #fff;
+  line-height: 1.1;
+}
+.checkout-tagline span {
+  font-size: 35px;
+}
+.checkout-tagline p {
+  font-size: 12px;
+  text-transform: lowercase !important;
+  color: #979696;
 }
 /*
 ========================
-        contact
+        CONTACT
 ========================
 */
 .contact-content-wrapper {
@@ -514,7 +529,7 @@ td p {
 }
 .auth-header {
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 }
 .auth-header h1 {
   font-size: 25px;
@@ -523,9 +538,17 @@ td p {
 .auth-header p {
   color: #979696;
 }
+.guestcheckout {
+  display: flex;
+  flex-direction: column;
+}
+.guestcheckout-link {
+  color: var(--hoverColor);
+  text-decoration: underline;
+}
 .auth-box > * {
   display: inline-block;
-  margin-bottom: 1rem !important;
+  margin-bottom: 0.8rem !important;
 }
 .auth-box button {
   background-color: var(--mainColor);
@@ -558,10 +581,14 @@ td p {
   text-decoration: underline;
   color: var(--hoverColor);
 }
-
 .MuiOutlinedInput-input {
   font-size: 14px !important;
 }
+/*
+========================
+      CHECKOUT
+========================
+*/
 
 @media screen and (min-width: 500px) {
   .item-qty-dflex {

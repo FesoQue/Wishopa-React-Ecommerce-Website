@@ -11,6 +11,7 @@ import Error from './pages/Error';
 import Contact from './pages/Contact';
 import Signup from './Authentication/Signup';
 import Signin from './Authentication/Signin';
+import Guestcheckout from './pages/Guestcheckout';
 import { QueryClientProvider, QueryClient } from 'react-query';
 // import { ReactQueryDevtools } from 'react-query/devtools';
 import NavSidebar from './component/NavSidebar';
@@ -33,6 +34,7 @@ const App = () => {
               <Route exact path='/shopping-cart' component={Cart} />
               <Route exact path='/signin' component={Signin} />
               <Route exact path='/signup' component={Signup} />
+              <Route exact path='/guest-checkout' component={Guestcheckout} />
               <PrivateRoute exact path='/checkout' component={Checkout} />
               <Route exact path='/products/:id' component={Singleproduct} />
               <Route exact path='/:name' component={Categorypage} />

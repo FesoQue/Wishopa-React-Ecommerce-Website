@@ -52,8 +52,14 @@ const Signup = () => {
       <div className='auth-wrapper container'>
         <div className='auth-card'>
           <div className='auth-header'>
-            <h1>Welcome to Wishopa</h1>
+            <h1>Sign Up for Wishopa</h1>
             <p>Create your free account</p>
+            <p className='guestcheckout'>
+              <span>or</span>
+              <Link to='/guest-checkout' className='guestcheckout-link'>
+                continue as guest
+              </Link>
+            </p>
           </div>
           <div className='auth-form'>
             <Formik

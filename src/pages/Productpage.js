@@ -21,7 +21,7 @@ const ProductPage = () => {
   const [searchTerms, setSearchTerms] = useState('');
   const [filterValue, setFilterValue] = useState('');
   // useQuery fn
-  const { isLoading, isError, data } = useFetchAllProducts();
+  const { isLoading, isError, data, refetch } = useFetchAllProducts();
   // useContext
   const { handleSearch } = useAppContext();
   const productData = data?.data;
@@ -124,6 +124,9 @@ const ProductPage = () => {
           {isError ? (
             <div className='loading'>
               <img src={ERROR} alt='loading' />
+              <button onClick={refetch} className='retry-btn'>
+                Retry
+              </button>
             </div>
           ) : null}
         </div>

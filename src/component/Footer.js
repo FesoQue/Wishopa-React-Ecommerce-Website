@@ -46,6 +46,11 @@ const Footer = () => {
           </div>
         </div>
       </div>
+      <div className='attr'>
+        <p>
+          © <span>{new Date().getFullYear()}</span> Wishopa. All Rights Reserved
+        </p>
+      </div>
     </section>
   );
 };

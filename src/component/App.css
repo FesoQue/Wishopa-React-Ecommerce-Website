@@ -392,7 +392,7 @@ article.card::after {
     hsla(0, 0%, 24.96%, 0.3) 65.75%,
     hsla(0, 0%, 19.85%, 0.456875) 79.43%,
     hsla(0, 0%, 13.95%, 0.575) 90.28%,
-    hsla(0, 0%, 7.32%, 0.655625) 97.43%,
+    hsla(0, 0%, 7.32%, 0.755625) 97.43%,
     hsla(0, 0%, 0%, 0.75) 100%
   );
 }
@@ -633,7 +633,7 @@ article.card:hover h3 {
 ===============
 */
 .footer-section {
-  padding: 1rem 0;
+  padding: 1.5rem 0 0;
   margin-top: 2rem;
   background-color: #f3f3f3;
 }
@@ -658,6 +658,9 @@ article.card:hover h3 {
   align-items: center;
   margin-top: 1.2rem;
 }
+.footer-col-1 div img {
+  margin-right: 0.8rem;
+}
 .footer-content h4 {
   margin-bottom: 0.3rem;
 }
@@ -673,6 +676,13 @@ article.card:hover h3 {
 }
 .footer-col-3 div > * {
   line-height: 2;
+}
+.attr {
+  text-align: center;
+  color: #444;
+  font-size: 14px;
+  background-color: #e7e7e7;
+  padding: 0.5rem;
 }
 /*
 ===============
@@ -753,7 +763,7 @@ article.card:hover h3 {
   }
   /* footer */
   .footer-section {
-    padding: 2rem 0;
+    padding: 2rem 0 0;
   }
   .footer-content {
     flex-direction: row;
@@ -763,6 +773,7 @@ article.card:hover h3 {
   }
   .footer-content > * {
     margin-bottom: 0;
+    padding-bottom: 0.8rem;
   }
   .footer-col-1,
   .footer-col-1 h1.logo {
@@ -806,6 +817,9 @@ article.card:hover h3 {
     width: 85% !important;
   }
   /* nav */
+  .logo a {
+    font-size: 32px;
+  }
   .mobile-nav,
   .menu-btn,
   .search-toggle-icon,

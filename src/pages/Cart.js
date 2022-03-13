@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { AiFillDelete, AiOutlineLock } from 'react-icons/ai';
+import { AiFillDelete } from 'react-icons/ai';
+import { FcLock } from 'react-icons/fc';
 import { useAppContext } from '../Context/context';
 import { FaCaretDown, FaCaretUp } from 'react-icons/fa';
 import toast, { Toaster } from 'react-hot-toast';
@@ -18,7 +19,7 @@ const Cart = () => {
 
   const handleRemoveFn = (id) => {
     handleRemoveItem(id);
-    toast.error('Removed from cart');
+    toast.error('item removed from cart');
   };
 
   const handleCheckout = () => {
@@ -132,12 +133,12 @@ const Cart = () => {
               </div>
               <div className='cart-content-col-2'>
                 <div className='summary-wrapper'>
-                  <h4>Order summary</h4>
+                  <h3>Order summary</h3>
                   <div className='cart-cost'>
                     {/* 1 */}
                     <div>
                       <p>subtotal</p>
-                      <p>${total}</p>
+                      <p>${(total * 0.75).toFixed(2)}</p>
                     </div>
                     {/* 2 */}
                     <div>
@@ -147,16 +148,24 @@ const Cart = () => {
                     {/* 3 */}
                     <div>
                       <p>cart total</p>
-                      <p>${total}</p>
+                      <p>${(total * 0.75).toFixed(2)}</p>
                     </div>
                   </div>
                   <div className='checkout-btn-wrapper'>
                     <button onClick={handleCheckout}>
-                      Go to Payment
-                      <span>
-                        <AiOutlineLock />
-                      </span>
+                      Procced To Checkout
                     </button>
+                  </div>
+                  <div className='checkout-tagline'>
+                    <div>
+                      <span>
+                        <FcLock />
+                      </span>
+                    </div>
+                    <div>
+                      <h4>Secure Checkout</h4>
+                      <p>shipping is always safe and secure</p>
+                    </div>
                   </div>
                 </div>
               </div>
