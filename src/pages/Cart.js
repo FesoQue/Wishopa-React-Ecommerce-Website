@@ -147,6 +147,11 @@ const Cart = () => {
                     </div>
                     {/* 3 */}
                     <div>
+                      <p>estimated taxes</p>
+                      <p>${(total * 0.75 * 0.15).toFixed(2)}</p>
+                    </div>
+                    {/* 4 */}
+                    <div>
                       <p>cart total</p>
                       <p>${(total * 0.75).toFixed(2)}</p>
                     </div>

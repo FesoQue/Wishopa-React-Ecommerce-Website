@@ -3,9 +3,30 @@ import { Box, Button, TextField } from '@material-ui/core';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { useAppContext } from '../Context/context';
 import * as Yup from 'yup';
+import { MdOutlineArrowBack } from 'react-icons/md';
+import { useHistory } from 'react-router-dom';
 
 const Guestcheckout = () => {
-  const { total } = useAppContext();
+  const history = useHistory();
+
+  const { uniqueItem, total } = useAppContext();
+
+  // paystack
+  /* const publicKey = 'pk_test_fccce0bd935b9aa330b4cc1576cd0adeb194c4c6';
+  const amount = total * 100;
+  const componentProps = {
+    email,
+    amount,
+    metadata: {
+      name,
+    },
+    publicKey,
+    text: 'Checkout',
+    onSuccess: () => {
+      handleSummary();
+    },
+    onClose: () => alert(`Wait! Don't leave ${name}:(`),
+  };*/
 
   // => FORMIK / YUP
   const initialValues = {
@@ -52,7 +73,7 @@ const Guestcheckout = () => {
       .min(8, 'enter valid address')
       .required('state cannot be blank'),
 
-    citty: Yup.string().required('city cannot be blank'),
+    city: Yup.string().required('city cannot be blank'),
   });
 
   return (
@@ -66,12 +87,16 @@ const Guestcheckout = () => {
               validationSchema={validationSchema}
             >
               {(props) => (
-                <Form>
+                <Form noValidate autoComplete='off'>
                   {/* personal info */}
-                  <Box className='checkout-box'>
-                    <div className='checkout-info-title'>
-                      <h1>Account Information</h1>
+                  <Box className='checkout-info-box'>
+                    <div className='checkout-title'>
+                      <span onClick={() => history.push('/shopping-cart')}>
+                        <MdOutlineArrowBack />
+                      </span>
+                      <h1>Checkout</h1>
                     </div>
+                    <h2>Personal Information</h2>
                     <Field
                       name='fullName'
                       type='fullName'
@@ -107,9 +132,8 @@ const Guestcheckout = () => {
                         props.errors.phoneNumber && props.touched.phoneNumber
                       }
                     />
-                    <div className='checkout-info-title'>
-                      <h1>Shipping Address</h1>
-                    </div>
+
+                    <h2>Shipping Address</h2>
                     <Field
                       name='country'
                       type='country'
@@ -154,8 +178,14 @@ const Guestcheckout = () => {
                       required
                       error={props.errors.address && props.touched.address}
                     />
-                    <Button variant='contained' type='submit' fullWidth>
-                      CHECKOUT NOW
+                    <Button
+                      variant='contained'
+                      type='submit'
+                      fullWidth
+                      id='guest-checkout-btn'
+                      disabled={uniqueItem.length > 0 ? false : true}
+                    >
+                      CHECKOUT
                     </Button>
                   </Box>
                 </Form>
@@ -163,7 +193,7 @@ const Guestcheckout = () => {
             </Formik>
           </div>
         </div>
-        <div className='cart-content-col-2'>
+        <div className='checkout-content-col-2'>
           <div className='summary-wrapper'>
             <h3>Order summary</h3>
             <div className='cart-cost'>
@@ -179,13 +209,15 @@ const Guestcheckout = () => {
               </div>
               {/* 3 */}
               <div>
-                <p>cart total</p>
+                <p>estimated taxes</p>
+                <p>${(total * 0.75 * 0.15).toFixed(2)}</p>
+              </div>
+              {/* 4 */}
+              <div>
+                <p>estimated total</p>
                 <p>${(total * 0.75).toFixed(2)}</p>
               </div>
             </div>
-            {/* <div className='checkout-btn-wrapper'>
-              <button>Checkout</button>
-            </div> */}
           </div>
         </div>
       </div>

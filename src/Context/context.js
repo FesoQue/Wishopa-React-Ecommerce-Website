@@ -13,7 +13,6 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from 'firebase/auth';
-import toast, { Toaster } from 'react-hot-toast';
 
 const AppContext = createContext();
 
@@ -22,6 +21,7 @@ export const AppContextProvider = ({ children }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [uniqueItem, setUniqueItem] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
+  const [error, setError] = useState();
 
   //mobile navigation sidebar
   const handleOpenSidebar = () => {
@@ -49,7 +49,7 @@ export const AppContextProvider = ({ children }) => {
         setAllData(data);
       })
       .catch((error) => {
-        console.log(error.message);
+        setError(true);
       });
   };
 
@@ -220,6 +220,8 @@ export const AppContextProvider = ({ children }) => {
     handleSignin,
     handleSignout,
     currentUser,
+
+    error,
   };
 
   return (

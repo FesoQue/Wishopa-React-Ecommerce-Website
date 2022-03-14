@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React from 'react';
 import { TextField, Box, Button } from '@material-ui/core';
 import { Field, Form, Formik, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
@@ -57,7 +57,7 @@ const Signup = () => {
             <p className='guestcheckout'>
               <span>or</span>
               <Link to='/guest-checkout' className='guestcheckout-link'>
-                continue as guest
+                continue to checkout as guest
               </Link>
             </p>
           </div>
@@ -68,7 +68,7 @@ const Signup = () => {
               validationSchema={validationSchema}
             >
               {(props) => (
-                <Form>
+                <Form noValidate autoComplete='off'>
                   <Box className='auth-box'>
                     <Field
                       name='email'
