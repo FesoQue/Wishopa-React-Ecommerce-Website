@@ -15,7 +15,8 @@ const Checkout = () => {
   const userEmail = currentUser?.email;
   console.log(userEmail);
 
-  const publicKey = 'pk_test_fccce0bd935b9aa330b4cc1576cd0adeb194c4c6';
+  const publicKey = process.env.REACT_APP_PAYSTACK_KEY;
+
   const amount = total * 100;
   const componentProps = {
     userEmail,
