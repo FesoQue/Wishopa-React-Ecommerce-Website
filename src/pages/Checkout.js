@@ -6,57 +6,30 @@ import * as Yup from 'yup';
 import { MdOutlineArrowBack } from 'react-icons/md';
 import { useHistory } from 'react-router-dom';
 import { PaystackButton } from 'react-paystack';
-import { useEffect } from 'react';
 import { RiInformationLine } from 'react-icons/ri';
+import { useEffect } from 'react';
 import { db } from '../Authentication/firebase-config';
-import { doc, setDoc, updateDoc } from 'firebase/firestore';
+import { doc, setDoc, serverTimestamp } from 'firebase/firestore';
 
 const Checkout = () => {
   const history = useHistory();
 
-  // => CONTEXT
-  const { uniqueItem, total, currentUser, error } = useAppContext();
-
   // => STATES
   const [isCheckoutBtn, setIsCheckoutBtn] = useState(false);
-  const [checkoutEmail, setCheckoutEmail] = useState();
-  const [info, setInfo] = useState({
-    fullName: '',
-    email: '',
-    phoneNumber: '',
-    country: '',
-    state: '',
-    city: '',
-    address: '',
-  });
 
-  // => FIREBASE COLLECTION
-  // if(currentUser) {
-
-  //   const userDocRef = db.collection('users').doc(currentUser?.uid);
-
-  // }
-
-  // => LOCAL STORAGE
-  const handleLocalStorage = () => {
-    const checkoutInfo = localStorage.getItem('formValues');
-    if (checkoutInfo) {
-      return JSON.parse(localStorage.getItem('formValues'));
-    } else {
-      return {
-        fullName: '',
-        email: '',
-        phoneNumber: '',
-        country: '',
-        state: '',
-        city: '',
-        address: '',
-      };
-    }
-  };
+  // => CONTEXT
+  const {
+    uniqueItem,
+    total,
+    currentUser,
+    info,
+    setInfo,
+    handleFormLocalStorage,
+  } = useAppContext();
 
   //  => PAYSTACK
   const publicKey = process.env.REACT_APP_PAYSTACK_KEY;
+  const checkoutEmail = currentUser?.email;
   const amount = total * 1000;
 
   const componentProps = {
@@ -81,7 +54,6 @@ const Checkout = () => {
     setInfo({
       ...info,
       fullName: values.fullName,
-      email: values.email,
       phoneNumber: values.phoneNumber,
       country: values.country,
       state: values.country,
@@ -91,33 +63,23 @@ const Checkout = () => {
 
     // => SAVING USERS INFO TO DB
     const docRef = doc(db, 'users', `${currentUser?.uid}`);
-    setDoc(
-      docRef,
-      {
-        name: values.fullName,
-        email: values.email,
-        tel: values.phoneNumber,
-        country: values.country,
-        state: values.state,
-        city: values.city,
-        address: values.address,
-        itemInCart: uniqueItem.length,
-      }
-      // { merge: true }
-    );
+    setDoc(docRef, {
+      name: values.fullName,
+      email: currentUser?.email,
+      tel: values.phoneNumber,
+      country: values.country,
+      state: values.state,
+      city: values.city,
+      address: values.address,
+      cart: uniqueItem,
+      timeStamp: serverTimestamp(),
+    });
   };
-
-  const validateEmail =
-    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
   const validationSchema = Yup.object().shape({
     fullName: Yup.string()
       .min(8, 'name should not be less than 8 characters')
       .required('name cannot be blank'),
-
-    email: Yup.string()
-      .matches(validateEmail, 'email is not valid')
-      .required('email cannot be blank'),
 
     phoneNumber: Yup.string().required('phone number cannot be blank'),
 
@@ -135,7 +97,6 @@ const Checkout = () => {
   useEffect(() => {
     if (
       info.fullName &&
-      info.email &&
       info.phoneNumber &&
       info.country &&
       info.state &&
@@ -146,15 +107,8 @@ const Checkout = () => {
     } else {
       setIsCheckoutBtn(false);
     }
-
     localStorage.setItem('formValues', JSON.stringify(info));
   }, [info]);
-
-  useEffect(() => {
-    if (currentUser) {
-      setCheckoutEmail(currentUser?.email);
-    }
-  }, [currentUser]);
 
   return (
     <div className='checkout-section section'>
@@ -162,7 +116,7 @@ const Checkout = () => {
         <div className='checkout-content-col-1'>
           <div className='checkout-form'>
             <Formik
-              initialValues={handleLocalStorage()}
+              initialValues={handleFormLocalStorage()}
               onSubmit={handleSubmit}
               validationSchema={validationSchema}
             >
@@ -199,10 +153,9 @@ const Checkout = () => {
                       fullWidth
                       as={TextField}
                       variant='outlined'
-                      helperText={<ErrorMessage name='email' />}
+                      value={currentUser?.email}
                       required
-                      error={props.errors.email && props.touched.email}
-                      inputProps={{ readOnly: isCheckoutBtn }}
+                      inputProps={{ readOnly: true }}
                     />
                     <Field
                       name='phoneNumber'

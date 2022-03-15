@@ -1,67 +1,87 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Button, TextField } from '@material-ui/core';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { useAppContext } from '../Context/context';
 import * as Yup from 'yup';
 import { MdOutlineArrowBack } from 'react-icons/md';
 import { useHistory } from 'react-router-dom';
+import { serverTimestamp, addDoc, collection } from 'firebase/firestore';
+import { db } from '../Authentication/firebase-config';
+import { PaystackButton } from 'react-paystack';
+import { RiInformationLine } from 'react-icons/ri';
 
 const Guestcheckout = () => {
   const history = useHistory();
 
-  const { uniqueItem, total } = useAppContext();
+  // => STATE
+  const [isCheckoutBtn, setIsCheckoutBtn] = useState(false);
 
-  // paystack
-  /* const publicKey = 'pk_test_fccce0bd935b9aa330b4cc1576cd0adeb194c4c6';
+  // => CONTEXT
+  const { uniqueItem, total, info, setInfo, handleFormLocalStorage } =
+    useAppContext();
+
+  // => PAYSTACK
+  const publicKey = 'pk_test_fccce0bd935b9aa330b4cc1576cd0adeb194c4c6';
   const amount = total * 100;
+
   const componentProps = {
-    email,
+    // email,
     amount,
     metadata: {
-      name,
+      // name,
     },
     publicKey,
     text: 'Checkout',
     onSuccess: () => {
-      handleSummary();
+      // handleSummary();
+      alert('success');
     },
-    onClose: () => alert(`Wait! Don't leave ${name}:(`),
-  };*/
-
-  // => FORMIK / YUP
-  const initialValues = {
-    fullName: '',
-    email: '',
-    phoneNumber: '',
-    country: '',
-    state: '',
-    city: '',
-    address: '',
+    onClose: () => alert(`Wait! Don't leave ${123}:(`),
   };
 
+  console.log(info.email);
+
+  // => FORMIK / YUP
   const handleSubmit = (values, props) => {
-    const email = values.email;
-    const password = values.password;
-    props.resetForm();
+    setInfo({
+      ...info,
+      fullName: values.fullName,
+      email: values.email,
+      phoneNumber: values.phoneNumber,
+      country: values.country,
+      state: values.country,
+      city: values.city,
+      address: values.address,
+    });
+    // => SAVING USERS INFO TO DB
+    const docRef = collection(db, 'users');
+    addDoc(docRef, {
+      name: values.fullName,
+      email: values.email,
+      tel: values.phoneNumber,
+      country: values.country,
+      state: values.state,
+      city: values.city,
+      address: values.address,
+      cart: uniqueItem,
+      timeStamp: serverTimestamp(),
+      isGuestCheckout: true,
+    });
   };
 
   const validateEmail =
     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-  const phoneRegexExp = /^([0]{1})[0-9]{10}$/;
-
   const validationSchema = Yup.object().shape({
     fullName: Yup.string()
-      .min(8, 'name should be min of 8 characters')
+      .min(8, 'name should not be less than 8 characters')
       .required('name cannot be blank'),
 
     email: Yup.string()
-      .matches(validateEmail, 'email cannot be blank')
+      .matches(validateEmail, 'enter a valid email')
       .required('email cannot be blank'),
 
-    phoneNumber: Yup.string()
-      .matches(phoneRegexExp, 'enter valid phone number')
-      .required('phone number cannot be blank'),
+    phoneNumber: Yup.string().required('phone number cannot be blank'),
 
     address: Yup.string()
       .min(8, 'enter valid address')
@@ -69,12 +89,27 @@ const Guestcheckout = () => {
 
     country: Yup.string().required('country cannot be blank'),
 
-    state: Yup.string()
-      .min(8, 'enter valid address')
-      .required('state cannot be blank'),
+    state: Yup.string().required('state cannot be blank'),
 
     city: Yup.string().required('city cannot be blank'),
   });
+
+  useEffect(() => {
+    if (
+      info.fullName &&
+      info.email &&
+      info.phoneNumber &&
+      info.country &&
+      info.state &&
+      info.city &&
+      info.address
+    ) {
+      setIsCheckoutBtn(true);
+    } else {
+      setIsCheckoutBtn(false);
+    }
+    localStorage.setItem('formValues', JSON.stringify(info));
+  }, [info]);
 
   return (
     <div className='checkout-section section'>
@@ -82,7 +117,7 @@ const Guestcheckout = () => {
         <div className='checkout-content-col-1'>
           <div className='checkout-form'>
             <Formik
-              initialValues={initialValues}
+              initialValues={handleFormLocalStorage()}
               onSubmit={handleSubmit}
               validationSchema={validationSchema}
             >
@@ -178,15 +213,40 @@ const Guestcheckout = () => {
                       required
                       error={props.errors.address && props.touched.address}
                     />
-                    <Button
-                      variant='contained'
-                      type='submit'
-                      fullWidth
-                      id='checkout-btn'
-                      disabled={uniqueItem.length > 0 ? false : true}
-                    >
-                      CHECKOUT
-                    </Button>
+                    {!isCheckoutBtn ? (
+                      <div className='warning-info'>
+                        <span style={{ color: 'red' }}>
+                          <RiInformationLine />
+                        </span>
+                        <span>
+                          Please ensure all information provided is correct
+                          before proceeding
+                        </span>
+                      </div>
+                    ) : null}
+                    {isCheckoutBtn ? (
+                      <span id='checkout-now-btn'>
+                        {uniqueItem.length > 0 ? (
+                          <PaystackButton {...componentProps} disabled='true' />
+                        ) : (
+                          <div className='warning-info'>
+                            <span style={{ fontSize: '18px' }}>
+                              <RiInformationLine />
+                            </span>
+                            <span>add item(s) to cart to checkout</span>
+                          </div>
+                        )}
+                      </span>
+                    ) : (
+                      <Button
+                        variant='contained'
+                        type='submit'
+                        fullWidth
+                        id='checkout-btn'
+                      >
+                        confirm info
+                      </Button>
+                    )}
                   </Box>
                 </Form>
               )}

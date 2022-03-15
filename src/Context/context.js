@@ -13,7 +13,6 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from 'firebase/auth';
-import { db } from '../Authentication/firebase-config';
 
 const AppContext = createContext();
 
@@ -23,6 +22,15 @@ export const AppContextProvider = ({ children }) => {
   const [uniqueItem, setUniqueItem] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
   const [error, setError] = useState();
+  const [info, setInfo] = useState({
+    fullName: '',
+    email: '',
+    phoneNumber: '',
+    country: '',
+    state: '',
+    city: '',
+    address: '',
+  });
 
   //mobile navigation sidebar
   const handleOpenSidebar = () => {
@@ -54,13 +62,22 @@ export const AppContextProvider = ({ children }) => {
       });
   };
 
-  // localStorage implementation
+  // => localStorage implementation
   const handleLocalStorage = () => {
     let list = localStorage.getItem('cart');
     if (list) {
       return JSON.parse(localStorage.getItem('cart'));
     } else {
       return [];
+    }
+  };
+
+  const handleFormLocalStorage = () => {
+    const checkoutInfo = localStorage.getItem('formValues');
+    if (checkoutInfo) {
+      return JSON.parse(localStorage.getItem('formValues'));
+    } else {
+      return info;
     }
   };
 
@@ -226,6 +243,9 @@ export const AppContextProvider = ({ children }) => {
     currentUser,
 
     error,
+    info,
+    setInfo,
+    handleFormLocalStorage,
   };
 
   return (
