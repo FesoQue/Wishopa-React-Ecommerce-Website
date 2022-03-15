@@ -182,7 +182,7 @@ const Guestcheckout = () => {
                       variant='contained'
                       type='submit'
                       fullWidth
-                      id='guest-checkout-btn'
+                      id='checkout-btn'
                       disabled={uniqueItem.length > 0 ? false : true}
                     >
                       CHECKOUT

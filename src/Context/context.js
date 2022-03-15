@@ -13,6 +13,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from 'firebase/auth';
+import { db } from '../Authentication/firebase-config';
 
 const AppContext = createContext();
 
@@ -97,8 +98,8 @@ export const AppContextProvider = ({ children }) => {
           ...state,
           myCart: [...state.myCart, itemExist],
         };
-
         break;
+
       case 'INCREASE':
         const increaseCartItems = state.myCart.map((cartItem) => {
           if (cartItem.id === action.payload) {
@@ -198,7 +199,10 @@ export const AppContextProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setCurrentUser(user);
+      if (user) {
+        setCurrentUser(user);
+        // const userDocRef = db.collection('users').doc(user.uid);
+      }
     });
     return unsubscribe;
   }, [currentUser]);
