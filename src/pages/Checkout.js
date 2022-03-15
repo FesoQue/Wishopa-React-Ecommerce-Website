@@ -56,8 +56,6 @@ const Checkout = () => {
   };
 
   //  => PAYSTACK
-
-  // const publicKey = 'pk_test_40ca856dda3ee8570a4b5750f229089099d51050';
   const publicKey = process.env.REACT_APP_PAYSTACK_KEY;
   const amount = total * 1000;
 
