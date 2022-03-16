@@ -227,8 +227,8 @@ const Checkout = () => {
                           <RiInformationLine />
                         </span>
                         <span>
-                          Please ensure all information provided is correct
-                          before proceeding
+                          Please ensure all information provided <br /> is
+                          correct before you proceed
                         </span>
                       </div>
                     ) : null}

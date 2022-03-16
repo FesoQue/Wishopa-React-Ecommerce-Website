@@ -687,7 +687,9 @@ input[type='number']::-webkit-outer-spin-button {
   font-size: 13px;
   line-height: 1.2;
 }
-
+.warning-info span br {
+  display: none;
+}
 @media screen and (min-width: 500px) {
   .item-qty-dflex {
     display: flex;
@@ -813,5 +815,12 @@ input[type='number']::-webkit-outer-spin-button {
   }
   .user-email {
     font-size: 13px;
+  }
+  .warning-info span br {
+    display: inline-block;
+  }
+  .warning-info span:nth-child(1) {
+    font-size: 20px;
+    margin-right: 0.3rem;
   }
 }

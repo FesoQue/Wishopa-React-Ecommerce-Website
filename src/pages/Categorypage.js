@@ -154,7 +154,7 @@ const Categorypage = () => {
                 </div>
                 {/* FILTER  */}
                 <FormControl variant='filled'>
-                  <InputLabel>Filter</InputLabel>
+                  <InputLabel>Sort By</InputLabel>
                   <Select
                     className='select'
                     onChange={(e) => setFilterValue(e.target.value)}
