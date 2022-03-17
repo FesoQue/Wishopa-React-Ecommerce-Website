@@ -30,7 +30,6 @@ const Singleproduct = () => {
   const price = productInfo?.price;
   const rating = productInfo?.rating;
   const rate = rating?.rate;
-  // const count = rating?.count;
 
   // fn
   const handleAddToCart = () => {

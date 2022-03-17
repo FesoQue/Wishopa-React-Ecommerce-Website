@@ -13,11 +13,13 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from 'firebase/auth';
+import { featuredData } from '../data';
 
 const AppContext = createContext();
 
 export const AppContextProvider = ({ children }) => {
   const [allData, setAllData] = useState();
+  const [newData, setNewData] = useState();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [uniqueItem, setUniqueItem] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
@@ -31,6 +33,8 @@ export const AppContextProvider = ({ children }) => {
     city: '',
     address: '',
   });
+
+  const { featuredProducts } = featuredData;
 
   //mobile navigation sidebar
   const handleOpenSidebar = () => {
@@ -105,11 +109,13 @@ export const AppContextProvider = ({ children }) => {
     dispatch({ type: 'REMOVE', payload: id });
   };
 
+  console.log(newData);
+
   // reducer function
   const reducer = (state, action) => {
     switch (action.type) {
       case 'ADD_TO_CART':
-        const itemExist = allData.find((item) => item.id === action.payload);
+        const itemExist = newData.find((item) => item.id === action.payload);
         itemExist.quantity = 1;
         return {
           ...state,
@@ -213,6 +219,13 @@ export const AppContextProvider = ({ children }) => {
     dispatch({ type: 'GET_TOTAL' });
     localStorage.setItem('cart', JSON.stringify(state.myCart));
   }, [state.myCart]);
+
+  useEffect(() => {
+    if (allData) {
+      const newData = [...allData, ...featuredProducts];
+      setNewData(newData);
+    }
+  }, [allData, featuredProducts]);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {

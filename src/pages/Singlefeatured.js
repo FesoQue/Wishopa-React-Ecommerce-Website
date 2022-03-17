@@ -1,35 +1,133 @@
-import axios from 'axios';
 import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import toast, { Toaster } from 'react-hot-toast';
+import { AiFillStar } from 'react-icons/ai';
+import { Link, useParams } from 'react-router-dom';
+import { featuredData } from '../data';
+import { useAppContext } from '../Context/context';
 
 const Singlefeatured = () => {
-  const [sample, setSample] = useState([]);
-  const getProductData = () => {
-    return axios
-      .get('/data.json')
-      .then((response) => {
-        return response.data;
-      })
-      .then((data) => {
-        setSample(data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-  useEffect(() => {
-    getProductData();
-  }, []);
+  const { id } = useParams();
 
-  console.log(sample);
+  const [product, setProduct] = useState();
+  const [alreadyInCart, setAlreadyInCart] = useState(false);
+
+  const { featuredProducts } = featuredData;
+
+  // context
+  const { AddToCart, uniqueItem } = useAppContext();
+
+  // fn
+  const handleAddToCart = () => {
+    AddToCart(productID);
+
+    toast.success('Added to cart!');
+  };
+
+  useEffect(() => {
+    featuredProducts.filter((item) => {
+      if (item.id === Number(id)) {
+        setProduct(item);
+      }
+    });
+  }, [id]);
+
+  useEffect(() => {
+    // if item exist in cart change button text to added to cart.
+    const alreadyInCart = uniqueItem.some((item) => item.title === title);
+
+    alreadyInCart ? setAlreadyInCart(true) : setAlreadyInCart(false);
+  }, [uniqueItem]);
+
+  // item properties
+  const productID = product?.id;
+  const title = product?.title;
+  const image = product?.image;
+  const desc = product?.description;
+  const category = product?.category;
+  const price = product?.price;
+  const rating = product?.rating;
+  const feature = product?.features;
+
   return (
-    <div>
-      {sample.map((item) => {
-        return <img src={item.image} alt='' />;
-      })}
-    </div>
+    <section className='section single-page-section'>
+      <div className='url-slug container'>
+        <span>
+          <Link to='/'>/ home </Link>
+        </span>
+        <span>
+          <Link to='/products'>/ products </Link>
+        </span>
+      </div>
+      {/* product */}
+      {product ? (
+        <div className='single-item container'>
+          <div className='single-item-content'>
+            <div className='single-item-card'>
+              {/* product image */}
+              <div className='single-item-img-wrap single-featured-item-img'>
+                <img loading='lazy' src={image} alt={title} />
+              </div>
+              {/* info */}
+              <div className='single-item-info'>
+                {/* title */}
+                <p className='single-item-category'>{category}</p>
+                <h1>{title}</h1>
+                <p className='single-item-author'>
+                  By <Link to='/'>wishopa</Link>
+                </p>
+                {/* rating */}
+                <p className='single-item-rating'>
+                  Rating :
+                  <span style={{ color: 'gold' }}>
+                    <AiFillStar />
+                  </span>
+                  | <span style={{ color: '#8164f4' }}> {rating}</span>
+                </p>
+                {/* description */}
+                <p className='single-item-desc'>{desc}</p>
+                {/* features */}
+                <div className='item-features'>
+                  <p>
+                    <strong>Features:</strong>
+                  </p>
+                  <ul>
+                    {feature.map((item) => {
+                      return <li key={item}>- {item}</li>;
+                    })}
+                  </ul>
+                </div>
+                {/* price */}
+                <div className='single-item-price'>
+                  <p className='discount'>
+                    <span className='discount-price'>
+                      ${(price * 0.75).toFixed(2)}
+                    </span>
+                    <span className='discount-percent'>25%</span>
+                  </p>
+                  <p className='old-price'>${price}</p>
+                </div>
+                {/* add to cart */}
+                <div className='item-qty-wrapper'>
+                  <div className='add-to-cart'>
+                    <button
+                      disabled={alreadyInCart}
+                      className='addtocart-btn'
+                      onClick={handleAddToCart}
+                    >
+                      {alreadyInCart ? 'Added to cart' : 'Add to cart'}
+                      Add To Cart
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : null}
+      <Toaster />
+    </section>
   );
 };
 
