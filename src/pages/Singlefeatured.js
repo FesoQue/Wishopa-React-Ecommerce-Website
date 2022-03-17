@@ -8,7 +8,7 @@ const Singlefeatured = () => {
   const [sample, setSample] = useState([]);
   const getProductData = () => {
     return axios
-      .get('/data.json/2')
+      .get('/data.json')
       .then((response) => {
         return response.data;
       })
