@@ -1,0 +1,17 @@
+[
+    {
+      "category": "men's clothing",
+     " description":
+        "Hit a home run in the style stakes with this classic baseball tee. Designed with traditional contrast sleeves and an 'est 98' graphic honoring the year Google was founded.",
+     " id": 21,
+      "image":" https://raw.githubusercontent.com/FesoQue/Wishopa-React-Ecommerce-Website/main/src/images/featured-imgs/baseballTee.jpg",
+      "price": 67.95,
+      "rating": 3.9,
+      "features": [
+        "Unisex fit.",
+        "52% cotton, 48% polyester.",
+        "Available in white with black sleeves and the white Google logo printed at left bicep."
+      ],
+      "title": "Est. 98 Baseball Tee"
+    }
+]

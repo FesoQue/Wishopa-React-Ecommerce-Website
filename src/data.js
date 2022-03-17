@@ -57,7 +57,7 @@ export const featuredData = {
         'Dress it up, or dress it down. We promise you"ll fall in love with the versatility of this triblend polo.',
       id: 24,
       image: FEATURED_IMG4,
-      price: 83.05,
+      price: 43.05,
       rating: 4.2,
       features: [
         '50/25/25 polyester/cotton/rayon blend. ',

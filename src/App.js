@@ -7,6 +7,7 @@ import Singleproduct from './pages/Singleproduct';
 import Productpage from './pages/Productpage';
 import PrivateRoute from './PrivateRoute/PrivateRoute';
 import Checkout from './pages/Checkout';
+import Singlefeatured from './pages/Singlefeatured';
 import Error from './pages/Error';
 import Contact from './pages/Contact';
 import Signup from './Authentication/Signup';
@@ -37,6 +38,7 @@ const App = () => {
               <Route exact path='/guest-checkout' component={Guestcheckout} />
               <PrivateRoute exact path='/checkout' component={Checkout} />
               <Route exact path='/products/:id' component={Singleproduct} />
+              <Route exact path='/featured/:id' component={Singlefeatured} />
               <Route exact path='/:name' component={Categorypage} />
               <Route exact path='*' component={Error} />
             </Switch>

@@ -1,9 +1,13 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { featuredData } from '../data';
 
 const Featured = () => {
+  const history = useHistory();
+
   const { featuredProducts } = featuredData;
-  console.log(featuredProducts);
+
   return (
     <section>
       <div className='content featured-content container'>
@@ -19,12 +23,16 @@ const Featured = () => {
               const title = products.title;
               const price = products.price;
               return (
-                <article key={id} className='featured-card'>
+                <article
+                  key={id}
+                  className='featured-card'
+                  onClick={() => history.push(`/featured/${id}`)}
+                >
                   <img loading='lazy' src={img} alt={title} />
                   <div>
                     <p>{title}</p>
                     <p>${price}</p>
-                    <button className='addtocart-btn'>Add To Cart</button>
+                    <button className='addtocart-btn'>Shop Item</button>
                   </div>
                 </article>
               );

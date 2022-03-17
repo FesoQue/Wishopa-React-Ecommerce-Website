@@ -453,6 +453,7 @@ article.card:hover h3 {
   gap: 0.5rem;
 }
 .featured-card {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -466,12 +467,16 @@ article.card:hover h3 {
   margin-top: 1rem;
 }
 .featured-card div > * {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.8rem;
 }
 .featured-card p:nth-child(1),
 .featured-card p:nth-child(2) {
   text-align: center;
-  font-size: 12px;
+  font-size: 14px;
+}
+.featured-card p:nth-child(2) {
+  color: var(--hoverColor);
+  font-weight: 600;
 }
 .featured-card button {
   padding: 0.5rem 0;
@@ -923,10 +928,6 @@ article.card:hover h3 {
   }
   .carousel {
     width: 60%;
-  }
-  /* category */
-  .category-cards {
-    /* gap: 1rem; */
   }
   /* review */
   .review-card {
