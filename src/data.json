@@ -1,17 +1,24 @@
-[
-    {
-      " id": 21,
-      "category": "men's clothing",
-     " description":
-        "Hit a home run in the style stakes with this classic baseball tee. Designed with traditional contrast sleeves and an 'est 98' graphic honoring the year Google was founded.",
-      "image":" https://raw.githubusercontent.com/FesoQue/Wishopa-React-Ecommerce-Website/main/src/images/featured-imgs/baseballTee.jpg",
-      "price": 67.95,
-      "rating": 3.9,
-      "features": [
-        "Unisex fit.",
-        "52% cotton, 48% polyester.",
-        "Available in white with black sleeves and the white Google logo printed at left bicep."
-      ],
-      "title": "Est. 98 Baseball Tee"
-    }
-]
+{
+    "superheroes": [
+        {
+            "id": 1,
+            "name": "Batman Dark Knight",
+            "alterEgo": "Bruce Wayne"
+        },
+        {
+            "id": 2,
+            "name": "Superman",
+            "alterEgo": "Clark Kent"
+        },
+        {
+            "id": 3,
+            "name": "Wonder Woman",
+            "alterEgo": "Princess Diana"
+        },
+        {
+            "id": 4,
+            "name": "Spider man",
+            "alterEgo": "Clark Kent"
+        }
+    ]
+}
