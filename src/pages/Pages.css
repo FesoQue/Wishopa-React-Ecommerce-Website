@@ -717,6 +717,9 @@ input[type='number']::-webkit-outer-spin-button {
 }
 
 @media screen and (min-width: 900px) {
+  .single-item {
+    padding-top: 2rem;
+  }
   .single-item-content {
     max-width: 100%;
   }

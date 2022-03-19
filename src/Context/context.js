@@ -12,8 +12,11 @@ import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut,
+  GoogleAuthProvider,
+  signInWithPopup,
 } from 'firebase/auth';
 import { featuredData } from '../data';
+import toast, { Toaster } from 'react-hot-toast';
 
 const AppContext = createContext();
 
@@ -33,6 +36,7 @@ export const AppContextProvider = ({ children }) => {
     city: '',
     address: '',
   });
+  const [docTitle, setDocTitle] = useState('Wishopa');
 
   const { featuredProducts } = featuredData;
 
@@ -209,8 +213,26 @@ export const AppContextProvider = ({ children }) => {
   const handleSignout = async () => {
     return signOut(auth);
   };
+
+  // => google sign in
+  const provider = new GoogleAuthProvider();
+
+  const signInWithGoogle = () => {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        toast.success(`Sign in Successful, Welcome ${result.user.email}`);
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
+  };
   // --- END OF FIREBASE AUTH IMPLEMENTATION
 
+  // => CHANGE PAGE TITLE
+
+  document.title = docTitle;
+
+  // --- END OF CHANGE PAGE TITLE
   useEffect(() => {
     getProductData();
     setUniqueItem(resArr);
@@ -227,12 +249,9 @@ export const AppContextProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setCurrentUser(user);
-        // const userDocRef = db.collection('users').doc(user.uid);
-      }
+      user ? setCurrentUser(user) : setCurrentUser(null);
     });
-    return unsubscribe;
+    return () => unsubscribe();
   }, [currentUser]);
 
   const value = {
@@ -250,6 +269,7 @@ export const AppContextProvider = ({ children }) => {
 
     handleSignup,
     handleSignin,
+    signInWithGoogle,
     handleSignout,
     currentUser,
 
@@ -257,11 +277,15 @@ export const AppContextProvider = ({ children }) => {
     info,
     setInfo,
     handleFormLocalStorage,
+
+    docTitle,
+    setDocTitle,
   };
 
   return (
     <>
       <AppContext.Provider value={value}>{children}</AppContext.Provider>
+      <Toaster />
     </>
   );
 };

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import { featuredData } from '../data';
 
@@ -14,7 +13,7 @@ const Featured = () => {
         <div className='title'>
           <h2>Featured Products</h2>
         </div>
-        <p className='subtext'>Shop items by category</p>
+        <p className='subtext'>Shop high quality, low price fashion</p>
         <div className='featured-products'>
           <div className='featured-product-cards'>
             {featuredProducts.map((products) => {

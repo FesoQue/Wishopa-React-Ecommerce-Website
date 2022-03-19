@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { TextField, Box, Button } from '@material-ui/core';
 import { Field, Form, Formik, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
@@ -11,7 +11,7 @@ const Signin = () => {
   const history = useHistory();
 
   // => CONTEXT
-  const { handleSignin, currentUser } = useAppContext();
+  const { handleSignin, signInWithGoogle, currentUser } = useAppContext();
 
   // => FORMIK / YUP
   const initialValues = {
@@ -27,12 +27,11 @@ const Signin = () => {
     const password = values.password;
 
     toast.promise(handleSignin(email, password), {
+      success: (data) => `Sign in successful, welcome ${data.user.email}`,
       error: (err) => `${err.toString()}`,
     });
     props.resetForm();
   };
-
-  // ======== THIS CODE BELOW WORKS =========
 
   if (currentUser) {
     history.push('/checkout');
@@ -100,7 +99,10 @@ const Signin = () => {
                 <span style={{ color: '#979696' }}>or sign in with</span>
                 <span className='line'></span>
               </div>
-              <GoogleButton style={{ width: '100%', color: '#fff' }} />
+              <GoogleButton
+                style={{ width: '100%', color: '#fff' }}
+                onClick={signInWithGoogle}
+              />
             </div>
             <div className='need-acct'>
               <p>

@@ -15,7 +15,7 @@ const Singlefeatured = () => {
   const { featuredProducts } = featuredData;
 
   // context
-  const { AddToCart, uniqueItem } = useAppContext();
+  const { AddToCart, uniqueItem, setDocTitle } = useAppContext();
 
   // fn
   const handleAddToCart = () => {
@@ -40,7 +40,12 @@ const Singlefeatured = () => {
         setProduct(item);
       }
     });
+    setDocTitle(title);
   }, [id]);
+
+  useEffect(() => {
+    setDocTitle(title);
+  }, [productID]);
 
   // if item exist in cart change button text to added to cart.
   const isInCart = uniqueItem.some((item) => item.title === title);

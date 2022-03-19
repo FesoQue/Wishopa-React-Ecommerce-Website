@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useFetchAllProducts } from '../QueryHooks/useFetchAllProducts';
 import BANNER from '../images/men-banner.png';
 import BANNER2 from '../images/women-banner.png';
@@ -23,7 +23,7 @@ const ProductPage = () => {
   // useQuery fn
   const { isLoading, isError, data, refetch } = useFetchAllProducts();
   // useContext
-  const { handleSearch } = useAppContext();
+  const { handleSearch, setDocTitle } = useAppContext();
   const productData = data?.data;
 
   // sort --- ascending
@@ -94,6 +94,10 @@ const ProductPage = () => {
     <img src={BANNER3} alt='banner' />,
     <img src={BANNER4} alt='banner' />,
   ];
+
+  useEffect(() => {
+    setDocTitle('Wishopa - all products');
+  }, [productData]);
 
   return (
     <section className='section product-page-section'>

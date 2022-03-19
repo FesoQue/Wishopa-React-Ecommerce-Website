@@ -39,8 +39,6 @@ const Guestcheckout = () => {
     onClose: () => alert(`Wait! Don't leave ${123}:(`),
   };
 
-  console.log(info.email);
-
   // => FORMIK / YUP
   const handleSubmit = (values, props) => {
     setInfo({

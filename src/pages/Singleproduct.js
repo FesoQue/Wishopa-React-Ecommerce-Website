@@ -16,7 +16,7 @@ const Singleproduct = () => {
   const { isLoading, isError, data } = useSingleProductData(id);
 
   // context
-  const { AddToCart, uniqueItem } = useAppContext();
+  const { AddToCart, uniqueItem, setDocTitle } = useAppContext();
 
   // item properties
   const productInfo = data?.data;
@@ -35,6 +35,10 @@ const Singleproduct = () => {
 
     toast.success('Added to cart!');
   };
+
+  useEffect(() => {
+    setDocTitle(title);
+  }, [productInfo]);
 
   // if item exist in cart change button text to added to cart.
   const isInCart = uniqueItem.some((item) => item.title === title);

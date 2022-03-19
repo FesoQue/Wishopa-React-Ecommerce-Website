@@ -10,7 +10,7 @@ import toast, { Toaster } from 'react-hot-toast';
 const Signup = () => {
   const history = useHistory();
   // => context
-  const { handleSignup } = useAppContext();
+  const { handleSignup, signInWithGoogle, currentUser } = useAppContext();
 
   // => FORMIK / YUP
   const initialValues = {
@@ -34,6 +34,11 @@ const Signup = () => {
     props.resetForm();
   };
 
+  if (currentUser) {
+    history.push('/checkout');
+  }
+
+  // => FORMIK / YUP
   const validationSchema = Yup.object().shape({
     email: Yup.string()
       .matches(validateEmail, 'email is not a valid one')
@@ -119,7 +124,10 @@ const Signup = () => {
                 <span style={{ color: '#979696' }}>or sign in with</span>
                 <span className='line'></span>
               </div>
-              <GoogleButton style={{ width: '100%', color: '#fff' }} />
+              <GoogleButton
+                style={{ width: '100%', color: '#fff' }}
+                onClick={signInWithGoogle}
+              />
             </div>
             <div className='need-acct'>
               <p>

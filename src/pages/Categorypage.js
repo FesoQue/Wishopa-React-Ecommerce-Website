@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import BANNER from '../images/men-banner.png';
@@ -28,7 +28,7 @@ const Categorypage = () => {
   const { data, isLoading, isError, refetch } = useCategoryData(name);
 
   // useContext
-  const { handleSearch } = useAppContext();
+  const { handleSearch, setDocTitle } = useAppContext();
   const productData = data?.data;
 
   if (productData) {
@@ -96,6 +96,10 @@ const Categorypage = () => {
       sortByLowestPrice(productData);
     }
   }
+
+  useEffect(() => {
+    setDocTitle(`Wishopa - ${name}`);
+  }, [productData]);
 
   return (
     <section className='section category-page-section'>

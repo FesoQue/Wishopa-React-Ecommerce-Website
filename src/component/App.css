@@ -146,8 +146,8 @@ nav {
   left: 0;
   right: 0;
   bottom: -8px;
-  width: 22px;
-  height: 22px;
+  width: 20px;
+  height: 20px;
   margin: 0 auto;
   font-size: 14px;
   background-color: #f85643;
@@ -156,7 +156,7 @@ nav {
 }
 .auth-btn {
   min-width: 5.5ch;
-  padding: 0.22rem 0;
+  padding: 0.15rem 0;
   margin-left: 0.7rem;
   color: var(--hoverColor);
   background-color: #fff;
