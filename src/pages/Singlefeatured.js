@@ -11,7 +11,6 @@ const Singlefeatured = () => {
   const { id } = useParams();
 
   const [product, setProduct] = useState();
-  const [alreadyInCart, setAlreadyInCart] = useState(false);
 
   const { featuredProducts } = featuredData;
 
@@ -25,21 +24,6 @@ const Singlefeatured = () => {
     toast.success('Added to cart!');
   };
 
-  useEffect(() => {
-    featuredProducts.filter((item) => {
-      if (item.id === Number(id)) {
-        setProduct(item);
-      }
-    });
-  }, [id]);
-
-  useEffect(() => {
-    // if item exist in cart change button text to added to cart.
-    const alreadyInCart = uniqueItem.some((item) => item.title === title);
-
-    alreadyInCart ? setAlreadyInCart(true) : setAlreadyInCart(false);
-  }, [uniqueItem]);
-
   // item properties
   const productID = product?.id;
   const title = product?.title;
@@ -50,15 +34,24 @@ const Singlefeatured = () => {
   const rating = product?.rating;
   const feature = product?.features;
 
+  useEffect(() => {
+    featuredProducts.filter((item) => {
+      if (item.id === Number(id)) {
+        setProduct(item);
+      }
+    });
+  }, [id]);
+
+  // if item exist in cart change button text to added to cart.
+  const isInCart = uniqueItem.some((item) => item.title === title);
+
   return (
     <section className='section single-page-section'>
       <div className='url-slug container'>
         <span>
           <Link to='/'>/ home </Link>
         </span>
-        <span>
-          <Link to='/products'>/ products </Link>
-        </span>
+        <span>/ featured</span>
       </div>
       {/* product */}
       {product ? (
@@ -112,12 +105,11 @@ const Singlefeatured = () => {
                 <div className='item-qty-wrapper'>
                   <div className='add-to-cart'>
                     <button
-                      disabled={alreadyInCart}
+                      disabled={isInCart}
                       className='addtocart-btn'
                       onClick={handleAddToCart}
                     >
-                      {alreadyInCart ? 'Added to cart' : 'Add to cart'}
-                      Add To Cart
+                      {isInCart ? 'Added to cart' : 'Add to cart'}
                     </button>
                   </div>
                 </div>

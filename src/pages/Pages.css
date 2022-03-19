@@ -375,13 +375,13 @@ td {
 .cart-prod-desc p {
   color: #979696;
 }
-.cart-prod-desc h4 span,
 .amount-btn span,
 .amount {
-  color: var(--mainColor);
+  color: var(--hoverColor);
+  font-weight: 600;
 }
 td img {
-  max-width: 100px;
+  width: 100px;
 }
 td p {
   font-size: 12px;

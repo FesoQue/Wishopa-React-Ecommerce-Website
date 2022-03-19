@@ -109,8 +109,6 @@ export const AppContextProvider = ({ children }) => {
     dispatch({ type: 'REMOVE', payload: id });
   };
 
-  console.log(newData);
-
   // reducer function
   const reducer = (state, action) => {
     switch (action.type) {

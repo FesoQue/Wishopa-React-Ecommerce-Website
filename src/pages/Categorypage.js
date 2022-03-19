@@ -175,7 +175,11 @@ const Categorypage = () => {
                   const image = product.image;
                   const price = product.price;
                   return (
-                    <article key={id} className='product-card'>
+                    <article
+                      onClick={() => history.push(`/products/${id}`)}
+                      key={id}
+                      className='product-card'
+                    >
                       <div className='product-img-wrap'>
                         <img src={image} alt={title} />
                       </div>
@@ -184,11 +188,8 @@ const Categorypage = () => {
                         <p className='price'>
                           <span> ${price}</span>${(price * 0.75).toFixed(2)}
                         </p>
-                        <button
-                          className='product-details-btn'
-                          onClick={() => history.push(`/products/${id}`)}
-                        >
-                          Item Details
+                        <button className='product-details-btn'>
+                          Shop Item
                         </button>
                       </div>
                     </article>

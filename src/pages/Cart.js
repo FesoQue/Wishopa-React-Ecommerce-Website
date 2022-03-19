@@ -76,12 +76,11 @@ const Cart = () => {
                                 <span
                                   style={{
                                     fontWeight: '500',
-                                    color: '#8164f4',
+                                    color: '#5b5fdf',
                                   }}
                                 >
                                   ${(price * 0.75).toFixed(2)}
-                                </span>{' '}
-                                X {quantity}
+                                </span>
                               </p>
                             </td>
                             <td>

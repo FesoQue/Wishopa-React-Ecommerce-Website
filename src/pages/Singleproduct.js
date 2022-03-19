@@ -10,8 +10,6 @@ import { AiFillStar } from 'react-icons/ai';
 import toast, { Toaster } from 'react-hot-toast';
 
 const Singleproduct = () => {
-  const [alreadyInCart, setAlreadyInCart] = useState(false);
-
   const { id } = useParams();
 
   // useQuery fn
@@ -38,12 +36,8 @@ const Singleproduct = () => {
     toast.success('Added to cart!');
   };
 
-  useEffect(() => {
-    // if item exist in cart change button text to added to cart.
-    const alreadyInCart = uniqueItem.some((item) => item.title === title);
-
-    alreadyInCart ? setAlreadyInCart(true) : setAlreadyInCart(false);
-  }, [uniqueItem]);
+  // if item exist in cart change button text to added to cart.
+  const isInCart = uniqueItem.some((item) => item.title === title);
 
   return (
     <section className='section single-page-section'>
@@ -109,11 +103,11 @@ const Singleproduct = () => {
                 <div className='item-qty-wrapper'>
                   <div className='add-to-cart'>
                     <button
-                      disabled={alreadyInCart}
+                      disabled={isInCart}
                       className='addtocart-btn'
                       onClick={handleAddToCart}
                     >
-                      {alreadyInCart ? 'Added to cart' : 'Add to cart'}
+                      {isInCart ? 'Added to cart' : 'Add to cart'}
                     </button>
                   </div>
                 </div>

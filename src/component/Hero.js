@@ -34,9 +34,9 @@ const Hero = () => {
           <h2>
             Flat <span>25%</span> Off
           </h2>
-          <p>Enjoy Best Prices Mega sales</p>
+          <p>Enjoy Best Prices Fashion sales</p>
           <Link to='/products' className='cta-btn'>
-            View Collections
+            Shop Collections
           </Link>
         </div>
         <div className='hero-img-content carousel'>
