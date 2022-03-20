@@ -81,7 +81,7 @@ const Singlefeatured = () => {
                   <span style={{ color: 'gold' }}>
                     <AiFillStar />
                   </span>
-                  | <span style={{ color: '#8164f4' }}> {rating}</span>
+                  | <span style={{ color: '#5b5fdf' }}> {rating}</span>
                 </p>
                 {/* description */}
                 <p className='single-item-desc'>{desc}</p>

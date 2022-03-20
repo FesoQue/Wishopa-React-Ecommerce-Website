@@ -89,7 +89,7 @@ const Singleproduct = () => {
                   <span style={{ color: 'gold' }}>
                     <AiFillStar />
                   </span>
-                  | <span style={{ color: '#8164f4' }}> {rate}</span>
+                  | <span style={{ color: '#5b5fdf' }}> {rate}</span>
                 </p>
                 {/* description */}
                 <p className='single-item-desc'>{desc}</p>

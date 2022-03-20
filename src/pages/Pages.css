@@ -279,7 +279,7 @@ h2 {
 .single-item-info h1 {
   font-size: 24px;
   margin-bottom: 0;
-  color: var(--mainColor);
+  color: var(--hoverColor);
 }
 .single-item-author a {
   text-decoration: underline;
@@ -324,8 +324,8 @@ h2 {
 }
 .addtocart-btn {
   width: 100%;
-  padding: 0.7rem 0;
-  background-color: var(--mainColor);
+  padding: 0.8rem 0;
+  background-color: var(--hoverColor);
   color: #fff;
   border-radius: var(--radius);
   box-shadow: var(--shadow-light);
@@ -517,7 +517,7 @@ td p {
 }
 .contact-content-col-2 .box button {
   padding: 0.8rem 0;
-  background: var(--mainColor);
+  background: var(--hoverColor);
   color: #fff;
   font-size: 14px;
 }
@@ -569,7 +569,7 @@ td p {
   transition: var(--transition);
 }
 .auth-box button:hover {
-  background-color: var(--hoverColor);
+  background-color: var(--mainColor);
 }
 .google-btn div {
   display: flex;
