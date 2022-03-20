@@ -22,7 +22,7 @@
   --radius-full: 50%;
   --spacing: 2px;
   --transition: 0.3s ease-in-out;
-  --shadow-light: 0 1px 5px 1px rgba(0, 0, 0, 0.05);
+  --shadow-light: 0 1px 5px 1px rgba(0, 0, 0, 0.1);
   --shadow-dark: 0 8px 15px 0px rgba(0, 0, 0, 0.3);
   --cursor: pointer;
 }
@@ -269,6 +269,9 @@ nav {
 .hero-text-content {
   padding: 0 0 1rem;
 }
+.hero-text-content h1 {
+  font-size: 10vw;
+}
 .hero-text-content > * {
   margin-bottom: 1rem;
 }
@@ -278,6 +281,9 @@ nav {
   position: relative;
   color: var(--hoverColor);
   white-space: nowrap;
+}
+.hero-text-content h1 span {
+  margin-left: 10px;
 }
 .hero-text-content h1 span::before,
 .hero-text-content h2 span::before {
@@ -546,7 +552,7 @@ article.card:hover h3 {
   left: -20px;
   width: 80px;
   height: 80px;
-  background-color: var(--mainColor);
+  background-color: var(--hoverColor);
   border-radius: 50%;
   z-index: -1;
 }
@@ -557,7 +563,7 @@ article.card:hover h3 {
   left: 0;
   width: 120px;
   height: 120px;
-  border: 3px solid var(--mainColor);
+  border: 3px solid var(--hoverColor);
   border-radius: 50%;
   z-index: -1;
 }
@@ -576,16 +582,16 @@ article.card:hover h3 {
   position: absolute;
   left: 95%;
   bottom: -46px;
-  color: #555;
+  color: #45424b;
   font-size: 15px;
   font-weight: 400;
 }
 .review-text-content {
-  margin-top: 3.2rem;
+  margin-top: 3.5rem;
 }
 .review-text-content p {
   font-weight: 400;
-  color: #919191;
+  color: #6d6d6d;
   line-height: 1.5;
 }
 .alice-carousel__dots {

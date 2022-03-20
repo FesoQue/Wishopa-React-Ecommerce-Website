@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { TextField, Box, Button } from '@material-ui/core';
 import { Field, Form, Formik, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
@@ -10,7 +10,8 @@ import toast, { Toaster } from 'react-hot-toast';
 const Signup = () => {
   const history = useHistory();
   // => context
-  const { handleSignup, signInWithGoogle, currentUser } = useAppContext();
+  const { handleSignup, signInWithGoogle, currentUser, setDocTitle } =
+    useAppContext();
 
   // => FORMIK / YUP
   const initialValues = {
@@ -51,6 +52,10 @@ const Signup = () => {
       .oneOf([Yup.ref('password')], 'password does not match')
       .required('confirm your password'),
   });
+
+  useEffect(() => {
+    setDocTitle('Wishopa - SignUp');
+  }, []);
 
   return (
     <section className='auth section'>

@@ -20,7 +20,7 @@
   --radius-full: 50%;
   --spacing: 2px;
   --transition: 0.3s ease-in-out;
-  --shadow-light: 0 1px 5px 1px rgba(0, 0, 0, 0.05);
+  --shadow-light: 0 1px 5px 1px rgba(0, 0, 0, 0.1);
   --shadow-dark: 0 8px 15px 0px rgba(0, 0, 0, 0.3);
   --cursor: pointer;
 }
@@ -425,9 +425,9 @@ td p {
   color: #fff;
   text-transform: capitalize;
 }
-.summary-wrapper div p:nth-child(1) {
+/* .summary-wrapper div p:nth-child(1) {
   font-weight: 600;
-}
+} */
 .checkout-btn-wrapper {
   display: flex;
   justify-content: center;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { AiFillDelete } from 'react-icons/ai';
 import { FcLock } from 'react-icons/fc';
@@ -15,6 +15,7 @@ const Cart = () => {
     handleDecreaseItem,
     handleRemoveItem,
     total,
+    setDocTitle,
   } = useAppContext();
 
   const handleRemoveFn = (id) => {
@@ -25,6 +26,10 @@ const Cart = () => {
   const handleCheckout = () => {
     history.push('/checkout');
   };
+
+  useEffect(() => {
+    setDocTitle('Wishopa - Cart');
+  }, []);
 
   return (
     <main>
@@ -136,7 +141,7 @@ const Cart = () => {
                   <div className='cart-cost'>
                     {/* 1 */}
                     <div>
-                      <p>subtotal</p>
+                      <p>sub Total</p>
                       <p>${(total * 0.75).toFixed(2)}</p>
                     </div>
                     {/* 2 */}

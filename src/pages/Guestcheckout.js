@@ -17,8 +17,14 @@ const Guestcheckout = () => {
   const [isCheckoutBtn, setIsCheckoutBtn] = useState(false);
 
   // => CONTEXT
-  const { uniqueItem, total, info, setInfo, handleFormLocalStorage } =
-    useAppContext();
+  const {
+    uniqueItem,
+    total,
+    info,
+    setInfo,
+    handleFormLocalStorage,
+    setDocTitle,
+  } = useAppContext();
 
   // => PAYSTACK
   const publicKey = 'pk_test_fccce0bd935b9aa330b4cc1576cd0adeb194c4c6';
@@ -108,6 +114,10 @@ const Guestcheckout = () => {
     }
     localStorage.setItem('formValues', JSON.stringify(info));
   }, [info]);
+
+  useEffect(() => {
+    setDocTitle('Wishopa - Guest-Checkout');
+  }, []);
 
   return (
     <div className='checkout-section section'>

@@ -17,8 +17,8 @@ const Review = () => {
       </div>
       <div className='review-text-content'>
         <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odio minus
-          hic, ipsa nam aliquid qui fugiat saepe debitis libero
+          Ordered a wear. Arrived on time and was as described. Good quality and
+          a well received gift
         </p>
       </div>
     </div>,
@@ -32,8 +32,8 @@ const Review = () => {
       </div>
       <div className='review-text-content'>
         <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odio minus
-          hic, ipsa nam aliquid qui fugiat saepe debitis libero
+          The experience Wishopa gives is one i have been envisioning for us all
+          for a lifetime
         </p>
       </div>
     </div>,
@@ -47,8 +47,8 @@ const Review = () => {
       </div>
       <div className='review-text-content'>
         <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odio minus
-          hic, ipsa nam aliquid qui fugiat saepe debitis libero
+          Their product is as good as advertised, i bought a comfortable blouse
+          at a great price.
         </p>
       </div>
     </div>,
@@ -69,7 +69,7 @@ const Review = () => {
         <div className='title'>
           <h2>Reviews</h2>
         </div>
-        <p className='subtext'>See what customers are saying</p>
+        <p className='subtext'>See what happy customers are saying</p>
         <div className='reviews'>
           <AliceCarousel
             items={items}

@@ -25,6 +25,7 @@ const Checkout = () => {
     info,
     setInfo,
     handleFormLocalStorage,
+    setDocTitle,
   } = useAppContext();
 
   //  => PAYSTACK
@@ -109,6 +110,10 @@ const Checkout = () => {
     }
     localStorage.setItem('formValues', JSON.stringify(info));
   }, [info]);
+
+  useEffect(() => {
+    setDocTitle('Wishopa - Checkout');
+  }, []);
 
   return (
     <div className='checkout-section section'>

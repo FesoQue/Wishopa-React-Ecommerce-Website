@@ -40,7 +40,7 @@ const Offer = () => {
             </div>
             <div className='offer-text-content'>
               <h4>30 Days return</h4>
-              <p>when not satisfied with items</p>
+              <p>when not satisfied with orders</p>
             </div>
           </div>
           {/* 4 */}

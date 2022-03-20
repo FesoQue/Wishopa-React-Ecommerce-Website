@@ -29,7 +29,8 @@ const Hero = () => {
       <div className='content hero-content container'>
         <div className='hero-text-content'>
           <h1>
-            Top Trending <br /> 2022 <span>Mega Deals!</span>
+            Top Trending <br /> {new Date().getFullYear()}
+            <span>Mega Deals!</span>
           </h1>
           <h2>
             Flat <span>35%</span> Off

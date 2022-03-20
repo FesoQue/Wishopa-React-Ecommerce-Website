@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { TextField, Box, Button } from '@material-ui/core';
 import { Field, Form, Formik, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
@@ -11,7 +11,8 @@ const Signin = () => {
   const history = useHistory();
 
   // => CONTEXT
-  const { handleSignin, signInWithGoogle, currentUser } = useAppContext();
+  const { handleSignin, signInWithGoogle, currentUser, setDocTitle } =
+    useAppContext();
 
   // => FORMIK / YUP
   const initialValues = {
@@ -46,6 +47,10 @@ const Signin = () => {
       .required('password cannot be blank')
       .min(6, 'password should be min of 6 characters'),
   });
+
+  useEffect(() => {
+    setDocTitle('Wishopa - SignIn');
+  }, []);
 
   return (
     <section className='auth section'>
