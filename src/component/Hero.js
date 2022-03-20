@@ -32,11 +32,11 @@ const Hero = () => {
             Top Trending <br /> 2022 <span>Mega Deals!</span>
           </h1>
           <h2>
-            Flat <span>25%</span> Off
+            Flat <span>35%</span> Off
           </h2>
           <p>Enjoy Best Prices Fashion sales</p>
           <Link to='/products' className='cta-btn'>
-            Shop Collections
+            Shop Products
           </Link>
         </div>
         <div className='hero-img-content carousel'>

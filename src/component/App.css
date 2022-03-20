@@ -304,17 +304,17 @@ nav {
 }
 .cta-btn {
   display: inline-block;
-  min-width: 18ch;
-  padding: 0.7rem 0;
+  min-width: 14ch;
+  padding: 0.75rem 0;
   margin-bottom: 0;
   text-align: center;
-  background: var(--mainColor);
+  background: var(--hoverColor);
   color: #fff;
   border-radius: var(--radius);
   transition: 0.3s ease-in-out;
 }
 .cta-btn:hover {
-  background-color: var(--hoverColor);
+  background-color: var(--mainColor);
 }
 
 /*
@@ -480,6 +480,7 @@ article.card:hover h3 {
 }
 .featured-card button {
   padding: 0.5rem 0;
+  background-color: var(--hoverColor);
 }
 /*
 ===============
@@ -626,10 +627,10 @@ article.card:hover h3 {
   width: 100%;
   display: flex;
   align-items: center;
-  padding: 0.4rem;
+  padding: 0.85rem;
   margin-bottom: 0.8rem;
   background-color: #fff;
-  outline: 1px solid white;
+  border: 1px solid white;
   border-radius: var(--radius);
 }
 #newsletter_form > .form-control input {
@@ -645,7 +646,7 @@ article.card:hover h3 {
 }
 .newsletter-btn {
   width: 100%;
-  padding: 0.4rem;
+  padding: 0.85rem;
   font-size: 14px;
   color: #fff;
   background-color: #f85643;

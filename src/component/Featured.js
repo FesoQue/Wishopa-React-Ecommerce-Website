@@ -13,7 +13,7 @@ const Featured = () => {
         <div className='title'>
           <h2>Featured Products</h2>
         </div>
-        <p className='subtext'>Shop high quality, low price fashion</p>
+        <p className='subtext'>Shop high quality, low pries items</p>
         <div className='featured-products'>
           <div className='featured-product-cards'>
             {featuredProducts.map((products) => {

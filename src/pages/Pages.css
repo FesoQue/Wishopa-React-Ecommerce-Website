@@ -196,25 +196,27 @@ h2 {
 .product-card .price {
   font-weight: 400;
   font-size: 14px;
-  color: var(--mainColor);
+  color: var(--hoverColor);
+  font-weight: 600;
 }
 .product-card .price span {
   margin-right: 0.8rem;
   color: #555;
   text-decoration: line-through;
+  font-weight: 500;
 }
 .product-details-btn {
   width: 100%;
   min-width: 13ch;
-  padding: 0.7rem 0;
-  background-color: var(--mainColor);
+  padding: 0.85rem 0;
+  background-color: var(--hoverColor);
   color: #fff;
   font-weight: 500;
   border-radius: var(--radius);
   transition: var(--transition);
 }
 .product-details-btn:hover {
-  background-color: var(--hoverColor);
+  background-color: var(--mainColor);
 }
 .loading {
   display: flex;
@@ -391,7 +393,7 @@ td p {
   margin-top: 1rem;
 }
 .delete button span {
-  color: crimson;
+  color: red;
   font-size: 18px;
 }
 .cart-empty p {
@@ -421,7 +423,7 @@ td p {
 }
 .summary-wrapper div p {
   color: #fff;
-  text-transform: uppercase;
+  text-transform: capitalize;
 }
 .summary-wrapper div p:nth-child(1) {
   font-weight: 600;
@@ -441,7 +443,7 @@ td p {
   color: #fff;
   font-weight: 600;
   border-radius: var(--radius);
-  text-transform: uppercase;
+  text-transform: capitalize;
 }
 .checkout-tagline {
   display: flex;
@@ -559,9 +561,9 @@ td p {
   margin-bottom: 0.8rem !important;
 }
 .auth-box button {
-  background-color: var(--mainColor);
+  background-color: var(--hoverColor);
   color: #fff;
-  padding: 0.5rem 0;
+  padding: 0.75rem 0;
   font-weight: 500;
   text-transform: capitalize;
   transition: var(--transition);
