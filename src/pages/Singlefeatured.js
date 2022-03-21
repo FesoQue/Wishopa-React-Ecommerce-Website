@@ -25,13 +25,11 @@ const Singlefeatured = () => {
     AddToCart(productID);
     toast.success('Added to cart!');
   };
-  // if (newData === undefined) {
-  //   setError(true);
-  // } else {
-  //   setError(false);
-  // }
 
-  // console.log(error);
+  //  <div className='container single-featured-err'>
+  //    <h3>Check your internet connection</h3>
+  //    <button onClick={() => getProductData()}>Retry</button>
+  //  </div>;
 
   // item properties
   const productID = product?.id;
@@ -68,7 +66,7 @@ const Singlefeatured = () => {
         <span>/ featured</span>
       </div>
       {/* product */}
-      {newData ? (
+      {product ? (
         <div className='single-item container'>
           <div className='single-item-content'>
             <div className='single-item-card'>
@@ -131,12 +129,7 @@ const Singlefeatured = () => {
             </div>
           </div>
         </div>
-      ) : (
-        <div className='container single-featured-err'>
-          <h3>Check your internet connection</h3>
-          <button onClick={() => getProductData()}>Retry</button>
-        </div>
-      )}
+      ) : null}
       <Toaster />
     </section>
   );
