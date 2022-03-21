@@ -99,7 +99,7 @@ const Singleproduct = () => {
                     <span className='discount-price'>
                       ${(price * 0.75).toFixed(2)}
                     </span>
-                    <span className='discount-percent'>25%</span>
+                    <span className='discount-percent'>35%</span>
                   </p>
                   <p className='old-price'>${price}</p>
                 </div>

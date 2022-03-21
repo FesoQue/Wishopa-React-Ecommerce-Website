@@ -239,9 +239,6 @@ nav {
   line-height: 2;
   transition: var(--transition);
 }
-.category-sublink a {
-  text-decoration: underline;
-}
 .mobile-nav-list li:hover .category-sublink {
   display: block;
 }

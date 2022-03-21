@@ -266,6 +266,8 @@ export const AppContextProvider = ({ children }) => {
     handleDecreaseItem,
     handleRemoveItem,
     uniqueItem,
+    newData,
+    getProductData,
 
     handleSignup,
     handleSignin,

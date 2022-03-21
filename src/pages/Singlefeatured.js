@@ -8,6 +8,8 @@ import { featuredData } from '../data';
 import { useAppContext } from '../Context/context';
 
 const Singlefeatured = () => {
+  const [error, setError] = useState();
+
   const { id } = useParams();
 
   const [product, setProduct] = useState();
@@ -15,14 +17,21 @@ const Singlefeatured = () => {
   const { featuredProducts } = featuredData;
 
   // context
-  const { AddToCart, uniqueItem, setDocTitle } = useAppContext();
+  const { AddToCart, uniqueItem, newData, setDocTitle, getProductData } =
+    useAppContext();
 
   // fn
   const handleAddToCart = () => {
     AddToCart(productID);
-
     toast.success('Added to cart!');
   };
+  // if (newData === undefined) {
+  //   setError(true);
+  // } else {
+  //   setError(false);
+  // }
+
+  // console.log(error);
 
   // item properties
   const productID = product?.id;
@@ -59,7 +68,7 @@ const Singlefeatured = () => {
         <span>/ featured</span>
       </div>
       {/* product */}
-      {product ? (
+      {newData ? (
         <div className='single-item container'>
           <div className='single-item-content'>
             <div className='single-item-card'>
@@ -102,7 +111,7 @@ const Singlefeatured = () => {
                     <span className='discount-price'>
                       ${(price * 0.75).toFixed(2)}
                     </span>
-                    <span className='discount-percent'>25%</span>
+                    <span className='discount-percent'>35%</span>
                   </p>
                   <p className='old-price'>${price}</p>
                 </div>
@@ -122,7 +131,12 @@ const Singlefeatured = () => {
             </div>
           </div>
         </div>
-      ) : null}
+      ) : (
+        <div className='container single-featured-err'>
+          <h3>Check your internet connection</h3>
+          <button onClick={() => getProductData()}>Retry</button>
+        </div>
+      )}
       <Toaster />
     </section>
   );
