@@ -108,7 +108,7 @@ h2 {
   transition: var(--transition);
 }
 .url-slug a:hover {
-  color: var(--mainColor);
+  color: var(--hoverColor);
 }
 .no-of-product {
   margin: 1rem 0;
