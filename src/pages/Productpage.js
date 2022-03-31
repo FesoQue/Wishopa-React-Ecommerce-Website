@@ -186,7 +186,10 @@ const ProductPage = () => {
                     <article
                       key={id}
                       className='product-card'
-                      onClick={() => history.push(`/products/${id}`)}
+                      onClick={() => {
+                        history.push(`/products/${id}`);
+                        window.scrollTo(0, 0);
+                      }}
                     >
                       <div className='product-img-wrap'>
                         <img src={image} alt={title} />

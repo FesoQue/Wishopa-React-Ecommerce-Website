@@ -180,7 +180,10 @@ const Categorypage = () => {
                   const price = product.price;
                   return (
                     <article
-                      onClick={() => history.push(`/products/${id}`)}
+                      onClick={() => {
+                        history.push(`/products/${id}`);
+                        window.scrollTo(0, 0);
+                      }}
                       key={id}
                       className='product-card'
                     >

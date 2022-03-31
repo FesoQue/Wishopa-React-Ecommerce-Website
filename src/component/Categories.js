@@ -20,9 +20,10 @@ const Categories = () => {
             {/* 1 */}
             <li
               data-category="men's clothing"
-              onClick={(e) =>
-                history.push(`/${e.currentTarget.dataset.category}`)
-              }
+              onClick={(e) => {
+                history.push(`/${e.currentTarget.dataset.category}`);
+                window.scrollTo(0, 0);
+              }}
             >
               <article className='card' tabIndex='0'>
                 <h3>Men's Wear</h3>
@@ -37,9 +38,10 @@ const Categories = () => {
             {/* 2 */}
             <li
               data-category="women's clothing"
-              onClick={(e) =>
-                history.push(`/${e.currentTarget.dataset.category}`)
-              }
+              onClick={(e) => {
+                history.push(`/${e.currentTarget.dataset.category}`);
+                window.scrollTo(0, 0);
+              }}
             >
               <article className='card'>
                 <h3>Women's Wear</h3>
@@ -54,9 +56,10 @@ const Categories = () => {
             {/* 3 */}
             <li
               data-category='electronics'
-              onClick={(e) =>
-                history.push(`/${e.currentTarget.dataset.category}`)
-              }
+              onClick={(e) => {
+                history.push(`/${e.currentTarget.dataset.category}`);
+                window.scrollTo(0, 0);
+              }}
             >
               <article className='card'>
                 <h3>Gadgets</h3>
@@ -71,9 +74,10 @@ const Categories = () => {
             {/* 4 */}
             <li
               data-category='jewelery'
-              onClick={(e) =>
-                history.push(`/${e.currentTarget.dataset.category}`)
-              }
+              onClick={(e) => {
+                history.push(`/${e.currentTarget.dataset.category}`);
+                window.scrollTo(0, 0);
+              }}
             >
               <article className='card'>
                 <h3>Jewelry</h3>

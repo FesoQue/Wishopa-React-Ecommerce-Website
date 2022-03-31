@@ -9,6 +9,7 @@ import { useAppContext } from '../Context/context';
 
 const Singlefeatured = () => {
   const [error, setError] = useState();
+  const [isNtwrkErr, setIsNtwrkErr] = useState();
 
   const { id } = useParams();
 
@@ -17,19 +18,19 @@ const Singlefeatured = () => {
   const { featuredProducts } = featuredData;
 
   // context
-  const { AddToCart, uniqueItem, newData, setDocTitle, getProductData } =
-    useAppContext();
+  const { AddToCart, uniqueItem, setDocTitle } = useAppContext();
 
   // fn
   const handleAddToCart = () => {
     AddToCart(productID);
     toast.success('Added to cart!');
+    if (error) {
+      setIsNtwrkErr(true);
+    } else {
+      setIsNtwrkErr(false);
+    }
+    console.log(isNtwrkErr);
   };
-
-  //  <div className='container single-featured-err'>
-  //    <h3>Check your internet connection</h3>
-  //    <button onClick={() => getProductData()}>Retry</button>
-  //  </div>;
 
   // item properties
   const productID = product?.id;

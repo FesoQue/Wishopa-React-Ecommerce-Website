@@ -45,7 +45,10 @@ const NavSidebar = () => {
             <Link
               to='/products'
               className='mobile-nav-link'
-              onClick={() => handleCloseSidebar()}
+              onClick={() => {
+                handleCloseSidebar();
+                window.scrollTo(0, 0);
+              }}
             >
               Products
             </Link>
@@ -60,25 +63,46 @@ const NavSidebar = () => {
             </button>
             <ul className='category-sublink'>
               <li>
-                <Link to="/men's clothing" onClick={() => handleCloseSidebar()}>
+                <Link
+                  to="/men's clothing"
+                  onClick={() => {
+                    handleCloseSidebar();
+                    window.scrollTo(0, 0);
+                  }}
+                >
                   Men's Clothing
                 </Link>
               </li>
               <li>
                 <Link
                   to="/women's clothing"
-                  onClick={() => handleCloseSidebar()}
+                  onClick={() => {
+                    handleCloseSidebar();
+                    window.scrollTo(0, 0);
+                  }}
                 >
                   women's Clothing
                 </Link>
               </li>
               <li>
-                <Link to='/electronics' onClick={() => handleCloseSidebar()}>
+                <Link
+                  to='/electronics'
+                  onClick={() => {
+                    handleCloseSidebar();
+                    window.scrollTo(0, 0);
+                  }}
+                >
                   Gadgets
                 </Link>
               </li>
               <li>
-                <Link to='/jewelery' onClick={() => handleCloseSidebar()}>
+                <Link
+                  to='/jewelery'
+                  onClick={() => {
+                    handleCloseSidebar();
+                    window.scrollTo(0, 0);
+                  }}
+                >
                   Jewelry
                 </Link>
               </li>
@@ -89,7 +113,10 @@ const NavSidebar = () => {
             <Link
               to='/contact-us'
               className='mobile-nav-link'
-              onClick={() => handleCloseSidebar()}
+              onClick={() => {
+                handleCloseSidebar();
+                window.scrollTo(0, 0);
+              }}
             >
               Contact Us
             </Link>

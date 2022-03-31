@@ -32,7 +32,14 @@ const Nav = () => {
         <div className='xl-nav-menu'>
           <ul className='xl-menu'>
             <li>
-              <Link to='/products'>Products</Link>
+              <Link
+                to='/products'
+                onClick={() => {
+                  window.scrollTo(0, 0);
+                }}
+              >
+                Products
+              </Link>
             </li>
             {/* categories */}
             <li>
@@ -44,21 +51,56 @@ const Nav = () => {
               </button>
               <ul className='category-sublink'>
                 <li>
-                  <Link to="/men's clothing">Men's Clothing</Link>
+                  <Link
+                    to="/men's clothing"
+                    onClick={() => {
+                      window.scrollTo(0, 0);
+                    }}
+                  >
+                    Men's Clothing
+                  </Link>
                 </li>
                 <li>
-                  <Link to="/women's clothing">women's Clothing</Link>
+                  <Link
+                    to="/women's clothing"
+                    onClick={() => {
+                      window.scrollTo(0, 0);
+                    }}
+                  >
+                    women's Clothing
+                  </Link>
                 </li>
                 <li>
-                  <Link to='/electronics'>Gadgets</Link>
+                  <Link
+                    to='/electronics'
+                    onClick={() => {
+                      window.scrollTo(0, 0);
+                    }}
+                  >
+                    Gadgets
+                  </Link>
                 </li>
                 <li>
-                  <Link to='/jewelery'>Jewelry</Link>
+                  <Link
+                    to='/jewelery'
+                    onClick={() => {
+                      window.scrollTo(0, 0);
+                    }}
+                  >
+                    Jewelry
+                  </Link>
                 </li>
               </ul>
             </li>
             <li>
-              <Link to='/contact-us'>Contact us</Link>
+              <Link
+                to='/contact-us'
+                onClick={() => {
+                  window.scrollTo(0, 0);
+                }}
+              >
+                Contact us
+              </Link>
             </li>
           </ul>
         </div>
@@ -66,7 +108,10 @@ const Nav = () => {
           {/* cart icon */}
           <button
             className='cartIcon'
-            onClick={() => history.push('/shopping-cart')}
+            onClick={() => {
+              history.push('/shopping-cart');
+              window.scrollTo(0, 0);
+            }}
           >
             <svg
               width='30'

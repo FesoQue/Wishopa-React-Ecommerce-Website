@@ -7,6 +7,11 @@ const Featured = () => {
 
   const { featuredProducts } = featuredData;
 
+  const handleRoute = (id) => {
+    history.push(`/featured/${id}`);
+    window.scrollTo(0, 0);
+  };
+
   return (
     <section>
       <div className='content featured-content container'>
@@ -25,7 +30,7 @@ const Featured = () => {
                 <article
                   key={id}
                   className='featured-card'
-                  onClick={() => history.push(`/featured/${id}`)}
+                  onClick={() => handleRoute(id)}
                 >
                   <img loading='lazy' src={img} alt={title} />
                   <div>
