@@ -178,12 +178,18 @@ nav {
   top: 9vh;
   left: -40px;
   width: 100px;
-  padding: 0.5rem;
   background-color: #fff;
   text-align: center;
+  box-shadow: var(--shadow-light);
 }
 .user-avatar ul li {
-  line-height: 2;
+  line-height: 2.5;
+}
+.user-avatar li:nth-child(1) {
+  border-bottom: 1px solid #45424b;
+}
+.user-avatar button {
+  color: #45424b;
 }
 
 /*
