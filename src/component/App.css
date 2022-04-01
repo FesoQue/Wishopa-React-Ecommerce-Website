@@ -116,6 +116,10 @@ header {
   display: flex;
   align-items: center;
 }
+.col-2 {
+  width: 90px;
+  justify-content: space-between;
+}
 nav {
   justify-content: space-between;
 }
@@ -162,11 +166,26 @@ nav {
   background-color: #fff;
   border-radius: 3px;
 }
-.signout {
-  border: 1px solid #fff;
-  color: #fff;
-  background: none;
+#avatar {
+  transform: scale(0.85);
+  cursor: pointer;
 }
+.user-avatar {
+  position: relative;
+}
+.user-avatar ul {
+  position: absolute;
+  top: 9vh;
+  left: -40px;
+  width: 100px;
+  padding: 0.5rem;
+  background-color: #fff;
+  text-align: center;
+}
+.user-avatar ul li {
+  line-height: 2;
+}
+
 /*
 ===============
  NAV SIDEBAR
@@ -865,6 +884,9 @@ article.card:hover h3 {
   /* nav */
   .logo a {
     font-size: 32px;
+  }
+  .col-2 {
+    width: 120px;
   }
   .mobile-nav,
   .menu-btn,

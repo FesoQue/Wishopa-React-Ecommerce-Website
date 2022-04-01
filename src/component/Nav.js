@@ -4,8 +4,19 @@ import { FaCaretDown } from 'react-icons/fa';
 import { Link, useHistory } from 'react-router-dom';
 import './App.css';
 import { useAppContext } from '../Context/context';
+import { makeStyles } from '@material-ui/core/styles';
+import { deepOrange, deepPurple } from '@material-ui/core/colors';
+import Avatar from '@material-ui/core/Avatar';
+
+const useStyles = makeStyles((theme) => ({
+  white: {
+    backgroundColor: 'white',
+    color: '#5b5fdf',
+  },
+}));
 
 const Nav = () => {
+  const classes = useStyles();
   const history = useHistory();
 
   const { handleOpenSidebar, uniqueItem, currentUser, handleSignout } =
@@ -15,6 +26,8 @@ const Nav = () => {
     handleSignout();
     history.push('/');
   };
+
+  console.log(currentUser);
 
   return (
     <header>
@@ -129,12 +142,24 @@ const Nav = () => {
             </svg>
             <span>{uniqueItem.length}</span>
           </button>
-          {/* login/logout button */}
           {currentUser ? (
-            <button className='auth-btn signout' onClick={handleUserSignout}>
-              Logout
-            </button>
+            <div className='user-avatar'>
+              <Avatar
+                className={classes.white}
+                id='avatar'
+                src={currentUser.photoURL && currentUser.photoURL}
+              />
+              <ul className=''>
+                <li>
+                  <button>Profile</button>
+                </li>
+                <li>
+                  <button onClick={handleSignout}>Log Out</button>
+                </li>
+              </ul>
+            </div>
           ) : (
+            // login
             <button
               onClick={() => history.push('/signin')}
               className='auth-btn'
