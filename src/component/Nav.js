@@ -5,7 +5,6 @@ import { Link, useHistory } from 'react-router-dom';
 import './App.css';
 import { useAppContext } from '../Context/context';
 import { makeStyles } from '@material-ui/core/styles';
-import { deepOrange, deepPurple } from '@material-ui/core/colors';
 import Avatar from '@material-ui/core/Avatar';
 
 const useStyles = makeStyles((theme) => ({
