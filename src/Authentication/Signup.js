@@ -31,12 +31,11 @@ const Signup = () => {
       success: (data) => 'Account successfully created',
       error: (err) => `This just happened: ${err.toString()}`,
     });
-    history.push('/checkout');
-    props.resetForm();
+    history.push('/');
   };
 
   if (currentUser) {
-    history.push('/checkout');
+    history.push('/');
   }
 
   // => FORMIK / YUP

@@ -116,10 +116,6 @@ header {
   display: flex;
   align-items: center;
 }
-.col-2 {
-  width: 90px;
-  justify-content: space-between;
-}
 nav {
   justify-content: space-between;
 }
@@ -161,7 +157,7 @@ nav {
 .auth-btn {
   min-width: 5.5ch;
   padding: 0.15rem 0;
-  margin-left: 0.7rem;
+  margin-left: 0.8rem;
   color: var(--hoverColor);
   background-color: #fff;
   border-radius: 3px;
@@ -172,24 +168,35 @@ nav {
 }
 .user-avatar {
   position: relative;
+  margin-left: 0.8rem;
 }
 .user-avatar ul {
   position: absolute;
   top: 9vh;
-  left: -40px;
-  width: 100px;
+  left: -70px;
+  width: 120px;
   background-color: #fff;
-  text-align: center;
   box-shadow: var(--shadow-light);
+  display: none;
+}
+.user-avatar ul.show-widget {
+  display: block;
 }
 .user-avatar ul li {
   line-height: 2.5;
+  transition: var(--transition);
 }
 .user-avatar li:nth-child(1) {
   border-bottom: 1px solid #45424b;
 }
 .user-avatar button {
+  width: 100%;
   color: #45424b;
+  transition: var(--transition);
+}
+.user-avatar button:hover {
+  background-color: var(--hoverColor);
+  color: #fff;
 }
 
 /*
@@ -798,7 +805,8 @@ article.card:hover h3 {
 }
 /* MEDIA QUERIES */
 @media screen and (min-width: 500px) {
-  .auth-btn {
+  .auth-btn,
+  .user-avatar {
     margin-left: 2rem;
   }
   .hero-text-content h1 {
@@ -890,9 +898,6 @@ article.card:hover h3 {
   /* nav */
   .logo a {
     font-size: 32px;
-  }
-  .col-2 {
-    width: 120px;
   }
   .mobile-nav,
   .menu-btn,

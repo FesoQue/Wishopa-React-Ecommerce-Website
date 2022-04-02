@@ -17,7 +17,9 @@ import { QueryClientProvider, QueryClient } from 'react-query';
 // import { ReactQueryDevtools } from 'react-query/devtools';
 import NavSidebar from './component/NavSidebar';
 import Cart from './pages/Cart';
+import Profile from './pages/Profile';
 import Footer from './component/Footer';
+
 const queryClient = new QueryClient();
 
 const App = () => {
@@ -37,6 +39,7 @@ const App = () => {
               <Route exact path='/signup' component={Signup} />
               <Route exact path='/guest-checkout' component={Guestcheckout} />
               <PrivateRoute exact path='/checkout' component={Checkout} />
+              <PrivateRoute exact path='/profile' component={Profile} />
               <Route exact path='/products/:id' component={Singleproduct} />
               <Route exact path='/featured/:id' component={Singlefeatured} />
               <Route exact path='/:name' component={Categorypage} />

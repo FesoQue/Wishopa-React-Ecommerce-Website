@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { HiMenu } from 'react-icons/hi';
 import { FaCaretDown } from 'react-icons/fa';
 import { Link, useHistory } from 'react-router-dom';
@@ -19,6 +19,8 @@ const Nav = () => {
   const classes = useStyles();
   const history = useHistory();
 
+  const [isOpen, setIsOpen] = useState(false);
+
   const { handleOpenSidebar, uniqueItem, currentUser, handleSignout } =
     useAppContext();
 
@@ -26,8 +28,6 @@ const Nav = () => {
     handleSignout();
     history.push('/');
   };
-
-  console.log(currentUser);
 
   return (
     <header>
@@ -143,18 +143,23 @@ const Nav = () => {
             <span>{uniqueItem.length}</span>
           </button>
           {currentUser ? (
-            <div className='user-avatar'>
+            <div className='user-avatar' onClick={() => setIsOpen(!isOpen)}>
               <Avatar
                 className={classes.white}
                 id='avatar'
                 src={currentUser.photoURL && currentUser.photoURL}
               />
-              <ul className=''>
-                <li>
+              <ul className={`${isOpen ? 'show-widget' : null}`}>
+                <li
+                  onClick={() => {
+                    history.push('/profile');
+                    setIsOpen(!isOpen);
+                  }}
+                >
                   <button>Profile</button>
                 </li>
-                <li>
-                  <button onClick={handleSignout}>Log Out</button>
+                <li onClick={() => setIsOpen(!isOpen)}>
+                  <button onClick={handleUserSignout}>Log Out</button>
                 </li>
               </ul>
             </div>

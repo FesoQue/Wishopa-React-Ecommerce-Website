@@ -31,11 +31,10 @@ const Signin = () => {
       success: (data) => `Sign in successful, welcome ${data.user.email}`,
       error: (err) => `${err.toString()}`,
     });
-    props.resetForm();
   };
 
   if (currentUser) {
-    history.push('/checkout');
+    history.push('/');
   }
 
   const validationSchema = Yup.object().shape({
