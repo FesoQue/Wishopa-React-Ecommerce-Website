@@ -15,6 +15,8 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   updateProfile,
+  updateEmail,
+  updatePassword,
 } from 'firebase/auth';
 import { featuredData } from '../data';
 import toast, { Toaster } from 'react-hot-toast';
@@ -191,7 +193,6 @@ export const AppContextProvider = ({ children }) => {
   });
 
   // FIREBASE AUTH IMPLEMENTATION
-
   // => signup
   const handleSignup = async (email, password, name) => {
     try {
@@ -230,13 +231,45 @@ export const AppContextProvider = ({ children }) => {
         toast.error(error.message);
       });
   };
+
+  // update display name
+  const updateUserDisplayName = async (name) => {
+    try {
+      if (currentUser) {
+        return await updateProfile(currentUser, {
+          displayName: name,
+        });
+      }
+    } catch (err) {
+      console.log(error);
+    }
+  };
+  // update email
+  const updateUserEmail = async (email) => {
+    try {
+      if (currentUser) {
+        return await updateEmail(currentUser, email);
+      }
+    } catch (err) {
+      return err.message;
+    }
+  };
+  // update password
+  const updateUserPassword = async (password) => {
+    try {
+      if (currentUser) {
+        return await updatePassword(currentUser, password);
+      }
+    } catch (err) {
+      return err.message;
+    }
+  };
   // --- END OF FIREBASE AUTH IMPLEMENTATION
 
   // => CHANGE PAGE TITLE
-
   document.title = docTitle;
-
   // --- END OF CHANGE PAGE TITLE
+
   useEffect(() => {
     getProductData();
     setUniqueItem(resArr);
@@ -278,6 +311,10 @@ export const AppContextProvider = ({ children }) => {
     signInWithGoogle,
     handleSignout,
     currentUser,
+    updateUserDisplayName,
+    updateUserEmail,
+    updateUserPassword,
+
     error,
     info,
     setInfo,

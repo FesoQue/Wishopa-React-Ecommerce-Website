@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useAppContext } from '../Context/context';
 import { Box, Button, TextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
 import { FaRegCalendarAlt } from 'react-icons/fa';
 import Moment from 'react-moment';
+import toast, { Toaster } from 'react-hot-toast';
+import { useEffect } from 'react';
 
 const useStyles = makeStyles((theme) => ({
   white: {
@@ -13,10 +15,158 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const validateEmail = (email) => {
+  const re =
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(String(email).toLowerCase());
+};
+
 const Profile = () => {
   const classes = useStyles();
-  const { currentUser } = useAppContext();
+  const {
+    currentUser,
+    updateUserDisplayName,
+    updateUserEmail,
+    updateUserPassword,
+  } = useAppContext();
 
+  const [name, setName] = useState(currentUser?.displayName);
+  const [email, setEmail] = useState(currentUser?.email);
+  const [password, setPassword] = useState('');
+  const [confirmPw, setConfirmPw] = useState('');
+  const [error, setError] = useState(false);
+  const [nameErrProps, setNameErrProps] = useState({
+    bool: false,
+    msg: '',
+  });
+  const [emailErrProps, setEmailErrProps] = useState({
+    bool: false,
+    msg: '',
+  });
+  const [passwordErrProps, setPasswordErrProps] = useState({
+    bool: false,
+    msg: '',
+  });
+  const [confirmErrProps, setConfirmErrProps] = useState({
+    bool: false,
+    msg: '',
+  });
+  const [isDisabled, setIsDisabled] = useState(false);
+
+  const handleUpdateProfile = (e) => {
+    e.preventDefault();
+
+    if (!name) {
+      setNameErrProps({
+        ...nameErrProps,
+        bool: true,
+        msg: 'name cannot be blank',
+      });
+    } else if (name.length < 3) {
+      setNameErrProps({
+        ...nameErrProps,
+        bool: true,
+        msg: 'name is too short',
+      });
+    } else {
+      toast.promise(updateUserDisplayName(name), {
+        success: (data) => 'name successfully updated',
+        error: (err) => `This just happened: ${err.toString()}`,
+      });
+      setNameErrProps({ ...nameErrProps, bool: false, msg: '' });
+    }
+
+    if (!email) {
+      setEmailErrProps({
+        ...emailErrProps,
+        bool: true,
+        msg: 'email cannot be empty',
+      });
+    } else if (!validateEmail(email)) {
+      setEmailErrProps({
+        ...emailErrProps,
+        bool: true,
+        msg: 'enter valid email',
+      });
+    } else {
+      toast.promise(updateUserEmail(email), {
+        success: (data) => 'email successfully updated',
+        error: (err) => `This just happened: ${err.toString()}`,
+      });
+      // updateUserEmail(email);
+      // console.log(email);
+      // setEmailErrProps({ ...emailErrProps, bool: false, msg: '' });
+    }
+
+    if (password) {
+      if (password.length < 6) {
+        setPasswordErrProps({
+          ...passwordErrProps,
+          bool: true,
+          msg: 'password be atleast 6 characters long',
+        });
+      }
+    } else {
+      setPasswordErrProps({
+        ...passwordErrProps,
+        bool: false,
+        msg: '',
+      });
+    }
+    // if (password !== '') {
+    //   setPasswordErrProps({
+    //     ...passwordErrProps,
+    //     bool: true,
+    //     msg: 'password be atleast 6 characters long',
+    //   });
+    // } else {
+    //   setPasswordErrProps({
+    //     ...passwordErrProps,
+    //     bool: false,
+    //     msg: '',
+    //   });
+    // }
+
+    if (password && !confirmPw) {
+      setConfirmErrProps({
+        ...confirmErrProps,
+        bool: true,
+        msg: 'confirm your password',
+      });
+    } else if (confirmPw !== password) {
+      setConfirmErrProps({
+        ...confirmErrProps,
+        bool: true,
+        msg: 'password does not match',
+      });
+    } else if (!password && password.length < 6) {
+      setConfirmErrProps({
+        ...confirmErrProps,
+        bool: false,
+        msg: '',
+      });
+    }
+
+    if (
+      password &&
+      password.length > 5 &&
+      confirmPw &&
+      confirmPw === password
+    ) {
+      toast.promise(updateUserPassword(password), {
+        success: (data) => 'password successfully updated',
+        error: (err) => `This just happened: ${err.toString()}`,
+      });
+    }
+  };
+
+  // useEffect(() => {
+  //   if (!name || !email || (email && !validateEmail(email))) {
+  //     setIsDisabled(true);
+  //   } else {
+  //     setIsDisabled(false);
+  //   }
+  // }, [name, email]);
   console.log(currentUser);
 
   return (
@@ -48,40 +198,54 @@ const Profile = () => {
         </div>
       </div>
       <div className='profile-col-2'>
-        <form action='' noValidate autoComplete='off'>
+        <form
+          action=''
+          noValidate
+          autoComplete='off'
+          onSubmit={handleUpdateProfile}
+        >
           <Box className='profile-form-card container'>
             <h2>Profile Settings</h2>
             <TextField
-              //   error
+              error={nameErrProps.bool}
               label='username'
-              defaultValue={currentUser?.displayName}
-              id='outlined-error-helper-text'
-              //   helperText='Incorrect entry.'
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              helperText={nameErrProps.msg}
               variant='outlined'
               fullWidth
             />
             <TextField
-              //   error
+              error={emailErrProps.bool}
               label='email address'
-              defaultValue={currentUser?.email}
-              id='outlined-error-helper-text'
-              //   helperText='Incorrect entry.'
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              type='email'
+              helperText={emailErrProps.msg}
               variant='outlined'
               fullWidth
             />
             <TextField
-              //   error
+              error={password && password.length < 6 && true}
               label='password'
-              id='outlined-error-helper-text'
-              //   helperText='Incorrect entry.'
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              type='password'
+              helperText={
+                password &&
+                password.length < 6 &&
+                'password should be atleast 6 characters long'
+              }
               variant='outlined'
               fullWidth
             />
             <TextField
-              //   error
+              error={confirmErrProps.bool}
               label='confirm password'
-              id='outlined-error-helper-text'
-              //   helperText='Incorrect entry.'
+              value={confirmPw}
+              onChange={(e) => setConfirmPw(e.target.value)}
+              type='password'
+              helperText={confirmErrProps.msg}
               variant='outlined'
               fullWidth
             />
@@ -90,12 +254,14 @@ const Profile = () => {
               type='submit'
               fullWidth
               id='checkout-btn'
+              disabled={isDisabled}
             >
               Update Profile
             </Button>
           </Box>
         </form>
       </div>
+      <Toaster />
     </div>
   );
 };

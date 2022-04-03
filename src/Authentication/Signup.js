@@ -29,7 +29,6 @@ const Signup = () => {
     const email = values.email;
     const password = values.password;
 
-    // setUserName(userName);
     toast.promise(handleSignup(email, password, userName), {
       success: (data) => 'Account successfully created',
       error: (err) => `This just happened: ${err.toString()}`,

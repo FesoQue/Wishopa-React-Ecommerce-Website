@@ -132,6 +132,9 @@ h2 {
 .profile-form-card > * {
   margin-bottom: 1rem !important;
 }
+.MuiFormHelperText-root {
+  color: red !important;
+}
 
 /*
 ========================
