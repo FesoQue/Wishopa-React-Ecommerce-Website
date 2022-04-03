@@ -153,6 +153,7 @@ const Nav = () => {
                   onClick={() => {
                     history.push('/profile');
                     setIsOpen(!isOpen);
+                    window.scrollTo(0, 0);
                   }}
                 >
                   <button>Profile</button>

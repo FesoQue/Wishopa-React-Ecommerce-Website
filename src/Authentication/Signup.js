@@ -15,6 +15,7 @@ const Signup = () => {
 
   // => FORMIK / YUP
   const initialValues = {
+    userName: '',
     email: '',
     password: '',
     confirmPassword: '',
@@ -24,22 +25,28 @@ const Signup = () => {
     /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
   const handleSubmit = (values, props) => {
+    const userName = values.userName;
     const email = values.email;
     const password = values.password;
 
-    toast.promise(handleSignup(email, password), {
+    // setUserName(userName);
+    toast.promise(handleSignup(email, password, userName), {
       success: (data) => 'Account successfully created',
       error: (err) => `This just happened: ${err.toString()}`,
     });
-    history.push('/');
   };
 
   if (currentUser) {
     history.push('/');
+    window.scrollTo(0, 0);
   }
 
   // => FORMIK / YUP
   const validationSchema = Yup.object().shape({
+    userName: Yup.string()
+      .required('username cannot be blank')
+      .min(3, 'username should be min of 3 characters'),
+
     email: Yup.string()
       .matches(validateEmail, 'email is not a valid one')
       .required('email cannot be blank'),
@@ -47,6 +54,7 @@ const Signup = () => {
     password: Yup.string()
       .required('password cannot be blank')
       .min(6, 'password should be min of 6 characters'),
+
     confirmPassword: Yup.string()
       .oneOf([Yup.ref('password')], 'password does not match')
       .required('confirm your password'),
@@ -63,13 +71,8 @@ const Signup = () => {
           <div className='auth-header'>
             <h1>Sign Up for Wishopa</h1>
             <p>Create your free account</p>
-            <p className='guestcheckout'>
-              <span>or</span>
-              <Link to='/guest-checkout' className='guestcheckout-link'>
-                continue to checkout as guest
-              </Link>
-            </p>
           </div>
+
           <div className='auth-form'>
             <Formik
               initialValues={initialValues}
@@ -79,6 +82,17 @@ const Signup = () => {
               {(props) => (
                 <Form noValidate autoComplete='off'>
                   <Box className='auth-box'>
+                    <Field
+                      name='userName'
+                      type='username'
+                      label='Username'
+                      fullWidth
+                      as={TextField}
+                      variant='outlined'
+                      helperText={<ErrorMessage name='userName' />}
+                      required
+                      error={props.errors.userName && props.touched.userName}
+                    />
                     <Field
                       name='email'
                       type='email'
@@ -125,7 +139,7 @@ const Signup = () => {
             <div className='google-btn'>
               <div>
                 <span className='line'></span>
-                <span style={{ color: '#979696' }}>or sign in with</span>
+                <span style={{ color: '#979696' }}>or </span>
                 <span className='line'></span>
               </div>
               <GoogleButton

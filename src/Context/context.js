@@ -14,6 +14,7 @@ import {
   signOut,
   GoogleAuthProvider,
   signInWithPopup,
+  updateProfile,
 } from 'firebase/auth';
 import { featuredData } from '../data';
 import toast, { Toaster } from 'react-hot-toast';
@@ -192,9 +193,12 @@ export const AppContextProvider = ({ children }) => {
   // FIREBASE AUTH IMPLEMENTATION
 
   // => signup
-  const handleSignup = async (email, password) => {
+  const handleSignup = async (email, password, name) => {
     try {
-      return createUserWithEmailAndPassword(auth, email, password);
+      await createUserWithEmailAndPassword(auth, email, password);
+      await updateProfile(auth.currentUser, {
+        displayName: name,
+      });
     } catch (error) {
       return error;
     }
@@ -274,7 +278,6 @@ export const AppContextProvider = ({ children }) => {
     signInWithGoogle,
     handleSignout,
     currentUser,
-
     error,
     info,
     setInfo,

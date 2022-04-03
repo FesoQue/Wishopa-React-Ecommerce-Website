@@ -3,6 +3,8 @@ import { useAppContext } from '../Context/context';
 import { Box, Button, TextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
+import { FaRegCalendarAlt } from 'react-icons/fa';
+import Moment from 'react-moment';
 
 const useStyles = makeStyles((theme) => ({
   white: {
@@ -27,16 +29,32 @@ const Profile = () => {
               id='profile-img'
               src={currentUser.photoURL && currentUser.photoURL}
             />
-            hello world
+          </div>
+          <p className='display-name'>
+            @{currentUser?.displayName && currentUser?.displayName}
+          </p>
+          <div className='created-at'>
+            <span>
+              <FaRegCalendarAlt />
+            </span>
+            <p>
+              Joined{' '}
+              <Moment
+                date={currentUser?.metadata.creationTime}
+                format='DD MMM Y'
+              />{' '}
+            </p>
           </div>
         </div>
       </div>
       <div className='profile-col-2'>
         <form action='' noValidate autoComplete='off'>
           <Box className='profile-form-card container'>
+            <h2>Profile Settings</h2>
             <TextField
               //   error
               label='username'
+              defaultValue={currentUser?.displayName}
               id='outlined-error-helper-text'
               //   helperText='Incorrect entry.'
               variant='outlined'
@@ -67,6 +85,14 @@ const Profile = () => {
               variant='outlined'
               fullWidth
             />
+            <Button
+              variant='contained'
+              type='submit'
+              fullWidth
+              id='checkout-btn'
+            >
+              Update Profile
+            </Button>
           </Box>
         </form>
       </div>

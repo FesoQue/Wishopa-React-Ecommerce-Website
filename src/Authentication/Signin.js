@@ -28,13 +28,14 @@ const Signin = () => {
     const password = values.password;
 
     toast.promise(handleSignin(email, password), {
-      success: (data) => `Sign in successful, welcome ${data.user.email}`,
+      success: (data) => `Sign in successful, welcome ${data.user.displayName}`,
       error: (err) => `${err.toString()}`,
     });
   };
 
   if (currentUser) {
     history.push('/');
+    window.scrollTo(0, 0);
   }
 
   const validationSchema = Yup.object().shape({
