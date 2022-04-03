@@ -721,7 +721,7 @@ td p {
   bottom: 0;
   width: 145px;
   height: 2.5px;
-  background-color: var(--mainColor);
+  background-color: var(--hoverColor);
 }
 .checkout-content-col-2 {
   background-color: var(--hoverColor);
