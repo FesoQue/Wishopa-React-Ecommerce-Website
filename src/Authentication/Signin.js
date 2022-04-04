@@ -101,7 +101,7 @@ const Signin = () => {
             <div className='google-btn'>
               <div>
                 <span className='line'></span>
-                <span style={{ color: '#979696' }}>or sign in with</span>
+                <span style={{ color: '#979696' }}>or</span>
                 <span className='line'></span>
               </div>
               <GoogleButton

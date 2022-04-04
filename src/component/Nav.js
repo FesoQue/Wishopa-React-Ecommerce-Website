@@ -166,7 +166,10 @@ const Nav = () => {
           ) : (
             // login
             <button
-              onClick={() => history.push('/signin')}
+              onClick={() => {
+                history.push('/signin');
+                window.scrollTo(0, 0);
+              }}
               className='auth-btn'
             >
               Login
