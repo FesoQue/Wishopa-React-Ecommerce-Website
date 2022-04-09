@@ -461,7 +461,7 @@ td p {
   margin-top: 1rem;
 }
 .delete button span {
-  color: red;
+  color: #f85643;
   font-size: 18px;
 }
 .cart-empty p {
